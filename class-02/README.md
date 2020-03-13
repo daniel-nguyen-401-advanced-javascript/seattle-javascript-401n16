@@ -174,7 +174,7 @@ try {
 
 ## Discussion Questions
 
-Using the discussion entry in your canvas assignment, answer the following questions to the best of your ability. You will not be graded on correctness, but rather on your attempt to answer the question. 
+Create a new markdown page in your reading notes repo for this class. On that page, answer the following questions. You will not be graded on correctness, but rather on your attempt to answer the question. Once you've created your new page, submit a link to that page using the canvas discussion entry field. Links should be somewhat of the format `https://USERNAME.github.io/reading-notes/class-##-reading`. 
 
 1. What is one benefit of JavaScript not enforcing type? 
 2. What is one downside of JavaScript not enforcing type? 
