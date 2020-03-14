@@ -89,7 +89,7 @@ Feel free to skim these code snippets, they are mainly here for your reference a
 const studentSchema = mongoose.Schema({
   name: { type: String, required: true },
   level: { type: String, required: true, enum: ['101', '102', '201', '301', '401'] },
-  currentCourse: { type: String, required: false, lowercase: true}
+  currentCourse: { type: String, required: false, lowercase: true},
   gpa: { type: Number, required: false },
 });
 ```
