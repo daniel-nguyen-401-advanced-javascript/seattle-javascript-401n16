@@ -4,7 +4,7 @@ Time to get hands on with Test Driven Development (TDD) and Continuous Integrati
 
 ## Before you begin
 
-Refer to _Getting Started_ in the [lab submission instructions](../../reference/submission-instructions/labs/README.md) for complete setup, configuration, deployment, and submission instructions.
+Refer to _Getting Started_ in the [lab submission instructions](../../reference/submission-instructions/labs) for complete setup, configuration, deployment, and submission instructions.
 
 > Create a new repository for this project, called 'notes' and work in a branch specific for this day
 
