@@ -71,6 +71,6 @@ Write a test for the `add()` method of the Notes module
 
 ### Assignment Submission Instructions
 
-Refer to the the [Submitting Standard Node.js Lab Submission Instructions](../../reference/submission-instructions/labs/node-apps.md) for the complete lab submission process and expectations
+Refer to the the [Submitting Standard Node.js Lab Submission Instructions](../../reference/submission-instructions/labs/node-apps) for the complete lab submission process and expectations
 
 > This application must be deployed to npm as an installable package. Please include a link to your npm page for this application with your submission
