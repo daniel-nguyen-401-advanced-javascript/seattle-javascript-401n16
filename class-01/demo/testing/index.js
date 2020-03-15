@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
-// Pull in our 'hello' module
-const hello = require("./lib/hello.js");
+// A function that prints your name and a nice message
 
-// Do something simple using its interface
-console.log(hello.sayHello("Sonia"));
+// our app will console log the returned string
+// It would be nice to have your name as a command line argument
+
