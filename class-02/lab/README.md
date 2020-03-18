@@ -35,7 +35,7 @@ notes -a "This is a really cool thing that I wanted to remember for later"
 - Your previous tests should remain functioning after the refactor
 - Create a schema for the command object (action + payload) created by the Input class and the Note (id + note contents) created by the Notes class
   - The command object should have an action that is a recognized action (for now just `'add'`, though this list may grow)
-  - The command object should have a non-empty payload
+  - The command object may or may not have a payload
   - The Note should have an id that is of type number
   - The Note should have some contents of type string
 
