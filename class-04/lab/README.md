@@ -20,7 +20,7 @@ The features for your note application remain unchanged:
   - Notes in a category: `notes --list school` or `notes -l school`
 
 - Users should be able to delete a single note
-  - `notes -d id-here`
+  - `notes -d id`
 
 ### Implementation Notes
 
