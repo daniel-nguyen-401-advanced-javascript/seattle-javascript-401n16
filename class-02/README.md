@@ -2,7 +2,7 @@
 
 ## Lecture Videos
 
-[Tuesday](https://frontrowviews.com/Home/Event/Details/5e56f389e4e6df15a8a3b8b3) || [Wednesday](https://frontrowviews.com/Home/Event/Details/5e56f389e4e6df15a8a3b8d0)
+[Tuesday](https://www.youtube.com/watch?v=6BSEBPyGoks) || [Wednesday]()
 
 ## Lecture Overview
 
