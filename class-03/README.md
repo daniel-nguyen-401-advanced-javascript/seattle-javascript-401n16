@@ -2,11 +2,11 @@
 
 ## Lecture Videos
 
-[Saturday Morning](https://www.youtube.com/watch?v=sa81H3qaW9Q) || [Saturday Afternoon](https://frontrowviews.com/Home/Event/Details/5e684f72eee6d91618503d50)
+[Saturday Morning](https://www.youtube.com/watch?v=sa81H3qaW9Q) || [Saturday Afternoon](https://www.youtube.com/watch?v=h2cE6TgDCd8)
 
 ## Lecture Overview
 
-With our knowledge of how to create custom object types using classes, we can now enforce a lot of structure upon our variables and data. Data modeling is the natural extension of this, where we plan in advance how data should be respresented in our codebase, and then make the necessary object types to support that plan. By the end of this lecture, you should be able to:
+With our knowledge of how to create custom object types using classes, we can now enforce a lot of structure upon our variables and data. Data modeling is the natural extension of this, where we plan in advance how data should be represented in our codebase, and then make the necessary object types to support that plan. By the end of this lecture, you should be able to:
 
 -   [x] Understand the role of data models
 -   [x] Define what CRUD operations are
