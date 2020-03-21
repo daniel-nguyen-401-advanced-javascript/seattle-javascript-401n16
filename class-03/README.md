@@ -59,6 +59,7 @@ Save or skim through the following links to help broaden your understanding.
 | [Mongoose Docs](https://mongoosejs.com/docs/)                |
 | [Data Modeling Explained in 10 Minutes or Less](https://www.credera.com/blog/technology-solutions/data-modeling-explained-in-10-minutes-or-less/) |
 | [MongoDB Atlas](https://docs.atlas.mongodb.com/)             |
+| [Compass](https://www.mongodb.com/products/compass)          |
 
 ### Vocabulary 
 
@@ -124,6 +125,18 @@ await schema.deleteOne({_id: id});
 ``` 
 mongod --dbpath=[/PATH/TO/DATA/FOLDER]
 ```
+
+#### MongoDB Shell Commands
+
+| Command                  | Description                                                  |
+| ------------------------ | ------------------------------------------------------------ |
+| `mongo`                  | Launch the mongo shell. Once in the shell, you should see `>` |
+| `show dbs`               | Show all the databases                                       |
+| `use db <name>`          | Use the database with name `<name>`                          |
+| `show collections`       | Show all the collections in the current database             |
+| `db.<collection>.find()` | List all the documents / records in the specified collection `<collection>` |
+| `db.<collection>.save()` | Save a new document / record to the specified collection `<collection>` |
+| `db.<collection>.drop()` | Completely removes the specified collection `<collection>`   |
 
 ## Discussion Questions
 
