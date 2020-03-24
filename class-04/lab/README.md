@@ -86,8 +86,7 @@ notes -d <id>
      "start": "node index.js",
      "lint": "eslint **/*.js",
      "test": "jest --verbose --coverage",
-     "test-watch": "jest --watchAll --verbose --coverage",
-     "jsdoc": "jsdoc -c ./docs/config/jsdoc.config.json"
+     "test-watch": "jest --watchAll --verbose --coverage"
      ```
 
 5. Set up the file structure for this lab according to the following outline: 
@@ -116,6 +115,8 @@ notes -d <id>
 
 Your major implementation task will be to refactor your Lab-03 code to contain a custom model wrapper class around our Mongoose model. You will also be asked to write tests for your CRUD database operations. 
 
+> The following outline below is a suggested implementation. Note that your lab does NOT have to constrain itself to these suggestions; there are many ways to code an application and we encourage creativity and unique approaches! This suggested implementation is primarily for anyone who is having trouble knowing where/how to start. 
+
 ### `notes-schema.js`
 
 Add `pre` and `post` hooks for the following Mongoose operations. Each hook should `console.log` a helpful message describing what command is being attempted/has completed. 
@@ -130,8 +131,13 @@ Add `pre` and `post` hooks for the following Mongoose operations. Each hook shou
 In this file, create a class with wrapper functions for your major CRUD operations. This file should define and export the class `Notes` with the following class methods: 
 
 * `create()`
+
 * `read()`
+
+  > Note: Many developers rename the `read()` function to a `get()` function. Feel free to choose any of those naming patterns, so long as the functionality is to reading a record from the database. 
+
 * `update()`
+
 * `delete()`
 
 ### `index.js`
