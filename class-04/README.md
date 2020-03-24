@@ -150,6 +150,23 @@ schema.post('findOne', function() {
 })
 ```
 
+#### Mongoose Pre and Post Hooks `this`
+
+For different Mongoose operations, the keyword `this` can either refer to an individual document/record, or the query being used to filter the documents/records in a collection. Here's a handy table for which commands are document-based and query-based. 
+
+| Mongoose Command | Within hook, `this` refers to...                             |
+| ---------------- | ------------------------------------------------------------ |
+| `save()`         | The document being saved                                     |
+| `remove()`       | The document being removed                                   |
+| `updateOne()`    | Either document or query, use `{ document: true }` or `{query: true}` to specify <br />`schema.pre('updateOne', { document: true }, function() {...})` |
+| `deleteOne()`    | Either document or query, use `{ document: true }` or `{query: true}` to specify <br />`schema.pre('deleteOne', { document: true }, function() {...})` |
+| `count()`        | The query of what should be counted                          |
+| `deleteMany()`   | The query of what should be deleted                          |
+| `find()`         | The query of what should be found                            |
+| `findOne()`      | The query of what should be found                            |
+| `update()`       | The query of what should be updated                          |
+| `updateMany()`   | The query of what should be updated                          |
+
 #### Mock Database Testing
 
 ```javascript

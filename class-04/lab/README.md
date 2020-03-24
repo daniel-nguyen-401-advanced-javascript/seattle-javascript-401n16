@@ -1,57 +1,173 @@
-# LAB: Advanced Mongo/Mongoose
+# Lab 04 --- Advanced Mongo/Mongoose
 
-Using a Mongo Schema and Data Model, implement a CRUD interface that can be used the same as your "in memory" data models from the previous labs
+In this lab, we'll be continuing our work on the `notes` command-line application. 
 
-## Before you begin
+## Application Overview
 
-Refer to *Getting Started*  in the [lab submission instructions](../../../reference/submission-instructions/labs/README.md) for complete setup, configuration, deployment, and submission instructions.
+The application you're building should be deployed to `npm` so that it may be installed by another developer onto their own machine. Once installed, you should be able to call and run your application using the `notes` command. For example instructions on how to get this command set up, refer to the following links: 
 
-> Building off of your previous day's branch, create a new branch for today called 'collection' and continue to work in your 'notes' repository.
+| [01](https://medium.com/netscape/a-guide-to-create-a-nodejs-command-line-package-c2166ad0452e) | [02](https://medium.com/netscape/a-guide-to-create-a-nodejs-command-line-package-c2166ad0452e) |
 
-## Requirements
+### Commands 
 
-The features for your note application remain unchanged:
+Your application should support the following commands / functionality: 
 
-- When a user adds a new note, save it to the database
-  - i.e. `notes -add "This is fun" --category school
+#### Simple Add
 
-- Users should be able to list notes from the database
-  - All Notes: `notes --list` or `notes -l`
-  - Notes in a category: `notes --list school` or `notes -l school`
+```bash
+notes --add "My new note"
+```
 
-- Users should be able to delete a single note
-  - `notes -d id`
+```bash
+notes -a "My new note"
+```
 
-### Implementation Notes
+#### Add With Category
 
-Although the requirements are the same, in this assignment you'll be refactoring the application as follows
+```bash
+notes --add "My new note" --category random
+```
 
-- Create a notes "collection" which requires your notes mongo schema
-  - You must implement the following collection interface methods for CRUD operations
-    - `get()`
-    - `create()`
-    - `update()`
-    - `delete()`
-  - Write a suite of tests, using TDD to get the tests and your model working in sync.
-  - Use `@code-fellows/supergoose`
-- Update your notes module to save, list, delete notes using the collection interface rather than the model itself
+```bash
+notes -a "My new note" -c random
+```
 
-### Reflect: What have we accomplished?
+#### List All Notes
 
-- How does having a single interface impact testing?
-  - What do you need (or not) to test?
-- Can you see how this might scale?
-- How do these interfaces relate to the file and memory interfaces?
-- Can they exist in the same system?
+```bash
+notes --list
+```
 
-### Stretch Goals
+```bash
+notes -l
+```
 
-- Add some pre and post hooks
-  - Logging
-  - Upper and Lower casing
+#### List Notes from Category
 
-### Assignment Submission Instructions
+```bash
+notes --list random
+```
 
-Refer to the the [Submitting Standard Node.js Lab Submission Instructions](../../../reference/submission-instructions/labs/node-apps.md) for the complete lab submission process and expectations
+```bash
+notes -l random
+```
 
-> This application must be deployed to npm as an installable package.  Please include a link to your npm page for this application with your submission
+#### Delete Note
+
+*Replace `<id>` with the id of the note you wish to delete*
+
+```bash
+notes --delete <id>
+```
+
+```bash
+notes -d <id>
+```
+
+## Getting Started
+
+1. Create a new GitHub repository for your lab 
+
+2. Copy over your existing Lab 03 code, which will serve as your "starter code"
+
+3. Add a `README.md` fo your lab, using the [`README-TEMPLATE.md` file](../../reference/submission-instructions/labs/README-template.md) as a starting point
+
+4. Ensure your directory has the following files at the top level (not in any sub-folders): 
+
+   * `.gitignore` ([template](../../configs/.gitignore))
+
+   * `.eslintrc.json` ([template](../../configs/.eslintrc.json))
+
+   * `.eslintignore` ([template](../../configs/.eslintignore))
+
+   * `package.json` with the following scripts: 
+
+     ```json
+     "start": "node index.js",
+     "lint": "eslint **/*.js",
+     "test": "jest --verbose --coverage",
+     "test-watch": "jest --watchAll --verbose --coverage",
+     "jsdoc": "jsdoc -c ./docs/config/jsdoc.config.json"
+     ```
+
+5. Set up the file structure for this lab according to the following outline: 
+
+   ```
+   .gitignore
+   .eslintrc.json
+   .eslintignore
+   index.js
+   package.json
+   
+   /_tests_
+   	input.test.js
+   	notes.test.js
+   
+   /lib
+   	input.js
+   	/models
+   		notes-schema.js
+   		notes-model.js
+   ```
+
+6. Setup GitHub Actions so that your code will be properly tested on each push ([instructions](../../reference/github-actions.md))
+
+## Implementation 
+
+Your major implementation task will be to refactor your Lab-03 code to contain a custom model wrapper class around our Mongoose model. You will also be asked to write tests for your CRUD database operations. 
+
+### `notes-schema.js`
+
+Add `pre` and `post` hooks for the following Mongoose operations. Each hook should `console.log` a helpful message describing what command is being attempted/has completed. 
+
+* `save()`
+* `findOne()`
+* `updateOne()`
+* `deleteOne()`
+
+### `notes-model.js`
+
+In this file, create a class with wrapper functions for your major CRUD operations. This file should define and export the class `Notes` with the following class methods: 
+
+* `create()`
+* `read()`
+* `update()`
+* `delete()`
+
+### `index.js`
+
+Ensure that your application is using your newly created `Notes` class for all database operations, instead of using MongoDB/Mongoose commands directly (for example, call `create()` instead of `save()`)
+
+### `notes.test.js`
+
+In this test file, use the package [`supergoose`](https://www.npmjs.com/package/@code-fellows/supergoose) to test all of your database CRUD operations. Use your `Notes` class defined in `notes-model.js` to create, read, update and delete dummy test data. Confirm that the mock database has been correctly changed and that your pre/post hooks correctly logged to the console. 
+
+## Lab Submission 
+
+In order to submit this lab, you will need to provide a link to your lab `README.md`, AND you will need to deploy your `notes` application to `npm`. 
+
+* `npm` deployment
+  * Ensure that any developer can download your application from `npm` 
+  * Ensure that once installed, your application can be run using the `notes` command in terminal
+  * In your `README.md`, describe how to install your application from `npm` (exact command preferred!)
+* `README.md`
+  * Ensure your lab `README.md` is well detailed in how to install and run your application
+  * Ensure you detail how to run your application tests if someone were to download your application source code
+  * Provide a link to a pull request from a feature branch into your lab repository's master branch
+    * You can merge the pull request if desired (a link to the PR should still exist)
+  * Describe how much testing coverage you achieved (what you tested, why your coverage is sufficient)
+  * Provide a [UML diagram](https://www.uml-diagrams.org/index-examples.html) detailing how the modules/files/pieces of your application fit together. 
+* Passing Tests
+  * Ensure that your tests all show as green/passing in your setup GitHub action
+* Code Documentation / Cleanliness
+  * Ensure that your code is well formatted and passes all lint tests 
+  * Ensure that all functions and classes within your code are documented with JSDoc comments
+    * [Official Documentation](http://usejsdoc.org/about-getting-started.html) 
+    * [Cheat Sheet](https://devhints.io/jsdoc) 
+    * [Style Guide](https://github.com/shri/JSDoc-Style-Guide)
+    * Be descriptive about the purpose of the function / class
+    * Declare data types for parameters and return values
+    * Note that you do not have to generate a JSDoc hosted website, just the commenting in your code files will suffice
+* Canvas Submission
+  * Submit a link to your lab's `README.md` 
+  * Once your lab has been graded for the first time, you may resubmit the link to your lab's `README.md` exactly once for a regrade
