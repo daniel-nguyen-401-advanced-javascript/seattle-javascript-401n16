@@ -91,6 +91,8 @@ notes -d <id>
 
 5. Set up the file structure for this lab according to the following outline: 
 
+   > The following outline below is a suggested implementation. Note that your lab does NOT have to constrain itself to these suggestions; there are many ways to code an application and we encourage creativity and unique approaches! This suggested implementation is primarily for anyone who is having trouble knowing where/how to start. 
+
    ```
    .gitignore
    .eslintrc.json
@@ -100,10 +102,12 @@ notes -d <id>
    
    /_tests_
    	input.test.js
-   	notes.test.js
+   	notes-action-handler.test.js
+   	notes-model.test.js
    
    /lib
    	input.js
+   	notes-action-handler.js
    	/models
    		notes-schema.js
    		notes-model.js
@@ -117,7 +121,11 @@ Your major implementation task will be to refactor your Lab-03 code to contain a
 
 > The following outline below is a suggested implementation. Note that your lab does NOT have to constrain itself to these suggestions; there are many ways to code an application and we encourage creativity and unique approaches! This suggested implementation is primarily for anyone who is having trouble knowing where/how to start. 
 
-### `notes-schema.js`
+### input.js 
+
+This file should take in the raw command line input from the terminal and use the [`minimist` `npm` package](https://www.npmjs.com/package/minimist) to help parse the input. The resulting parsed input should be of the format `{ action, payload }`.
+
+### notes-schema.js
 
 Add `pre` and `post` hooks for the following Mongoose operations. Each hook should `console.log` a helpful message describing what command is being attempted/has completed. 
 
@@ -126,7 +134,7 @@ Add `pre` and `post` hooks for the following Mongoose operations. Each hook shou
 * `updateOne()`
 * `deleteOne()`
 
-### `notes-model.js`
+### notes-model.js
 
 In this file, create a class with wrapper functions for your major CRUD operations. This file should define and export the class `Notes` with the following class methods: 
 
@@ -140,11 +148,15 @@ In this file, create a class with wrapper functions for your major CRUD operatio
 
 * `delete()`
 
-### `index.js`
+### notes-action-handler.js
+
+This file should interpret a command of the format `{ action, payload }` and execute the correct CRUD operation using the created model interface in `notes-model.js`.
+
+### index.js
 
 Ensure that your application is using your newly created `Notes` class for all database operations, instead of using MongoDB/Mongoose commands directly (for example, call `create()` instead of `save()`)
 
-### `notes.test.js`
+### notes-model.test.js
 
 In this test file, use the package [`supergoose`](https://www.npmjs.com/package/@code-fellows/supergoose) to test all of your database CRUD operations. Use your `Notes` class defined in `notes-model.js` to create, read, update and delete dummy test data. Confirm that the mock database has been correctly changed and that your pre/post hooks correctly logged to the console. 
 
