@@ -2,7 +2,7 @@
 
 ## Lecture Videos 
 
-[Saturday Morning](https://frontrowviews.com/Home/Event/Details/5e56f2bee4e6df15a8a39b8c) || [Saturday Afternoon](https://frontrowviews.com/Home/Event/Details/5e684f72eee6d91618503d50) 
+[Saturday Morning]() || [Saturday Afternoon]() 
 
 ## Lecture Overview
 

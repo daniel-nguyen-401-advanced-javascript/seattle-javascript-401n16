@@ -18,16 +18,15 @@ This application will be the implementation of a Linked List class, and any impo
 
 4. On your branch and within the `data-structures` folder, create a subfolder named `linkedList` which contains a file called `linked-list.js` and a local `README.md`
 
-5. Ensure your `linked-list` directory has the following additional files: 
+5. Ensure your directory has the following files at the top level (not in any sub-folders): 
 
-   * `.gitignore` ([template](../../configs/.gitignore))
+   * `.gitignore` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.gitignore))
 
-   * `.eslintrc.json` ([template](../../configs/.eslintrc.json))
+   * `.eslintrc.json` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.eslintrc.json))
 
-   * `.eslintignore` ([template](../../configs/.eslintignore))
+   * `.eslintignore` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.eslintignore))
 
    * `package.json` with the following scripts: 
-
      ```json
      "start": "node index.js",
      "lint": "eslint **/*.js",

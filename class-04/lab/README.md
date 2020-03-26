@@ -74,11 +74,11 @@ notes -d <id>
 
 4. Ensure your directory has the following files at the top level (not in any sub-folders): 
 
-   * `.gitignore` ([template](../../configs/.gitignore))
+   * `.gitignore` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.gitignore))
 
-   * `.eslintrc.json` ([template](../../configs/.eslintrc.json))
+   * `.eslintrc.json` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.eslintrc.json))
 
-   * `.eslintignore` ([template](../../configs/.eslintignore))
+   * `.eslintignore` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.eslintignore))
 
    * `package.json` with the following scripts: 
 
