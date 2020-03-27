@@ -2,7 +2,7 @@
 
 ## Lecture Videos 
 
-[Tuesday](https://www.youtube.com/watch?v=_RknmdEkzQ0) || [Wednesday]() 
+[Tuesday](https://www.youtube.com/watch?v=_RknmdEkzQ0) || [Wednesday](https://www.youtube.com/watch?v=Xkfo17-YPP0) 
 
 ## Lecture Overview
 
