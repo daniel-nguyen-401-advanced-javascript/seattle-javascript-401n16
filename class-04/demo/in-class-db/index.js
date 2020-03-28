@@ -14,14 +14,14 @@ mongoose.connect(dbUrl, {
 
 const dbOps = async () => {
     let newFoodData = {
-        name: 'grapes',
+        name: 'apple',
         calories: 100,
         type: 'fruit',
     };
 
-    //await FoodModel.create(newFoodData);
-    let record = await FoodModel.read('blah');
-    console.log('found record', record);
+    await FoodModel.create(newFoodData);
+    //let record = await FoodModel.read('5e7c1ea441ea38559e8e8258');
+    //console.log('found record', record);
 
     mongoose.disconnect();
 };
