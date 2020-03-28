@@ -41,3 +41,25 @@ describe('Database can create', () => {
         expect(response).toBeFalsy();
     });
 });
+
+describe('Database can delete', () => {
+    it('after successfully creating record', async () => {
+        let newRecord = await FoodModel.create({
+            name: 'kiwi',
+            calories: 100,
+            type: 'FRUIT',
+        });
+
+        let delResult = await FoodModel.delete(newRecord._id);
+        expect(delResult).toBe(true);
+    });
+
+    it('an existing record', async () => {
+        let records = await FoodModel.readByField({ name: 'pear' });
+        expect(records.length).toBe(1);
+        let pearId = records[0]._id;
+
+        let delResult = await FoodModel.delete(pearId);
+        expect(delResult).toBe(true);
+    });
+});
