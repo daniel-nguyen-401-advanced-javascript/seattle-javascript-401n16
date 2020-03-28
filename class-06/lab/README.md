@@ -59,7 +59,7 @@ DELETE /products/:id/
      "lint": "eslint **/*.js",
      ```
 
-4. Copy the file [`swagger.json`](https://github.com/codefellows/seattle-javascript-401n16/blob/master/class-06/lab/starter-code/swagger.json) from the course repository and place the copy within a `/docs` subfolder in your lab folder
+4. Copy the file [`swagger.json`](https://github.com/codefellows/seattle-javascript-401n16/blob/master/class-06/lab/starter-code/docs/swagger.json) from the course repository and place the copy within a `/docs` subfolder in your lab folder
 
 5. Set up the file structure for this lab according to the following outline: 
 
