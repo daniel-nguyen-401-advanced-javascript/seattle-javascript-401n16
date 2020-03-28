@@ -24,10 +24,6 @@ foodSchema.post('save', function() {
     console.log('-----');
 });
 
-foodSchema.post('deleteOne', function() {});
-
-foodSchema.pre('deleteOne', function() {});
-
 const foodModel = mongoose.model('foods', foodSchema);
 
 module.exports = foodModel;

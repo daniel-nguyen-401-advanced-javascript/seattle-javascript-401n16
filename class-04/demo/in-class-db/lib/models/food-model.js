@@ -30,28 +30,20 @@ class Model {
         }
     }
 
-    async readByField(query) {
-        try {
-            let foundRecords = await this.model.find(query);
-            if (foundRecords.length) return foundRecords;
-            else throw 'err';
-        } catch (e) {
-            console.log('---ERROR READING RECORDS---');
-            return false;
-        }
-    }
-
     async update(_id, changedRecord) {}
 
     async delete(_id) {
         try {
-            // how does mongoose let me delete?
-            let delResult = await this.model.deleteOne({ _id });
-            if (delResult.deletedCount === 0) throw 'err';
-            return true;
+            let foundDoc = await this.model.find({ name: 'grapes' });
+            console.log(foundDoc);
+            await foundDoc.findOneAndDelete({ text: noteText }),
+                function(err) {
+                    if (err) console.log(err);
+                    console.log('successful deletion');
+                };
+            mongoose.disconnect();
         } catch (e) {
-            console.log('---ERROR DELETING RECORD---');
-            return false;
+            console.error('could not delete');
         }
     }
 }
