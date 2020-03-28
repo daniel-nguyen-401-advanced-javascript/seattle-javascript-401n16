@@ -19,8 +19,8 @@ const dbOps = async () => {
         type: 'fruit',
     };
 
-    await FoodModel.create(newFoodData);
-    //let record = await FoodModel.read('5e7c1ea441ea38559e8e8258');
+    //await FoodModel.create(newFoodData);
+    let record = await FoodModel.delete('5e7f7ea8d2aafa3ebe39f94c');
     //console.log('found record', record);
 
     mongoose.disconnect();
