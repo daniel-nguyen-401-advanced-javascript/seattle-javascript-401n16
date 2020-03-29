@@ -43,9 +43,10 @@ class LinkedList {
         // console.log('pl counter', cmdCounter);
         // O(n+1) >> O(n)
         console.log(str);
+        return str;
     }
 }
-
+/*
 let myList = new LinkedList();
 
 // n = 0
@@ -70,3 +71,6 @@ myList.printList();
 // n = 5
 myList.addToBeginning('E');
 myList.printList();
+*/
+
+module.exports = LinkedList;
