@@ -23,12 +23,12 @@ Prior to class, review the readings below and answer the discussion questions in
 
 What does it mean to "model data"? In the realm of coding, this usually means creating a structure around how data is stored, and having checks built in to enforce that structure. For example, if you have an application that stores your friends' phone numbers, you might want to create a **data model** for a "phone number" instead of just storing strings.
 
-This data model for a phone number would have contraints upon it; it can only store a string of a certain length, containing primarily numeric characters. Then there would be something that checks if a phone number is valid - does it follow the constraints and does it make "sense" as a phone number? Finally, there would be some method of allowing a new phone number to be created such that it follows the constraints. A user could enter in "5553032022", and the data model would enforce that this is stored in a more proper format such as "1 (555) 303 2022". If a use entered in "dog" the data model will reject the input and not create a new entry.
+This data model for a phone number would have constraints upon it; it can only store a string of a certain length, containing primarily numeric characters. Then there would be something that checks if a phone number is valid - does it follow the constraints and does it make "sense" as a phone number? Finally, there would be some method of allowing a new phone number to be created such that it follows the constraints. A user could enter in "5553032022", and the data model would enforce that this is stored in a more proper format such as "1 (555) 303 2022". If a use entered in "dog" the data model will reject the input and not create a new entry.
 
 So, data modeling is a more planned and structured approach than simply creating `let`, `const` or `var` variables on the fly. When in the world of data modeling, we want to closely watch and regulate every action that may create or change the data. This leads us to the categorization of "**CRUD**" operations.
 
 -   **C**reate - add a new data entry
--   **R**ead - recieve the contents of an existing data entry
+-   **R**ead - receive the contents of an existing data entry
 -   **U**pdate - change an existing data entry
 -   **D**elete - remove an existing data entry
 
@@ -36,9 +36,9 @@ In the example of our phone number data model, every time you create a new phone
 
 Once we've defined a structure for our data within our JavaScript application, we have to figure out a method for storing that data long-term. This is where a **database** comes in.
 
-When connecting your application to a database, you have a lot of options. Many databases use the **Structured Query Language (SQL)** to store and acccess data. If you've had experience with Postgres, then you've used an SQL database. There is also the option of using a **non SQL (NoSQL)** database, which doesn't use a standard language but can instead use a variety of languages to access data. The fundamental difference between SQL and NoSQL databases, however, is in how the data itself is stored.
+When connecting your application to a database, you have a lot of options. Many databases use the **Structured Query Language (SQL)** to store and access data. If you've had experience with Postgres, then you've used an SQL database. There is also the option of using a **non SQL (NoSQL)** database, which doesn't use a standard language but can instead use a variety of languages to access data. The fundamental difference between SQL and NoSQL databases, however, is in how the data itself is stored.
 
-A SQL database can be thought of as more ridgid. Everything belongs in defined tables, and you use SQL to filter through those tables.
+A SQL database can be thought of as more rigid. Everything belongs in defined tables, and you use SQL to filter through those tables.
 
 A NoSQL database does not impose a structure; instead it uses a system of ids to find the data you're looking for. NoSQL databases are handy because they are much more flexible than SQL databases. Many startups have tended towards NoSQL databases because it can support changing needs and it can scale up easily.
 
@@ -150,4 +150,4 @@ Create a new markdown page in your reading notes repo for this class. On that pa
 2. What purpose do CRUD operations serve?
 3. What kind of database is Postgres? What kind of database is MongoDB?
 4. What is Mongoose and why do we need it?
-5. Define three related pieces of data in a possible application. An example for a store application might be Product, Category and Department. Describe the contraints and rules on each piece of data and how you would relate these pieces to each other. For example, each Product has a Category and belongs in a Department.
+5. Define three related pieces of data in a possible application. An example for a store application might be Product, Category and Department. Describe the constraints and rules on each piece of data and how you would relate these pieces to each other. For example, each Product has a Category and belongs in a Department.

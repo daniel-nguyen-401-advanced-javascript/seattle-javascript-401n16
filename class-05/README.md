@@ -31,7 +31,7 @@ A Linked List is a sequence of `Nodes` that are connected, or "linked", to each 
 
 ![Linked List](./assets/ll-01.png)
 
-Linked Lists may look conceptually like arrays, but they are in fact quite different. An array tends to be more ridgid; adding to an array or deleting from an array can be costly. In modern languages like JavaScript, developers don't usually have to worry about that cost. However, in older languages like Java and C++, arrays do not easily change size. Linked Lists can be a nice alternative in those languages, since it is quite easy to add or remove `Nodes`.
+Linked Lists may look conceptually like arrays, but they are in fact quite different. An array tends to be more rigid; adding to an array or deleting from an array can be costly. In modern languages like JavaScript, developers don't usually have to worry about that cost. However, in older languages like Java and C++, arrays do not easily change size. Linked Lists can be a nice alternative in those languages, since it is quite easy to add or remove `Nodes`.
 
 Typically, a standard Linked List is **singly linked**, meaning each `Node` in the list only maintains a link to the next `Node` in the list, often called `next`. You can have a **doubly linked** list, which means that each `Node` holds a link to the next AND previous `Nodes` in the list, often called `next` and `prev`. Doubly Linked Lists can be quite beneficial since they allow you to move forward and backward through the Linked List. Singly Linked Lists, however, can only move from left to right.
 
@@ -47,7 +47,7 @@ where exactly in the linked list we are and will allow us to traverse forward un
 Let's put a use case on our traversal. We want to check whether or not our LinkedList `includes` a specific value. The pseudocode for this function `includes` might be something like:
 
 ```javascript
-ALGORTIHM includes (searchVal)
+ALGORITHM includes (searchVal)
 	// INPUT  <-- integer value
 	// OUTPUT <-- boolean
 
@@ -111,7 +111,7 @@ Feel free to skim these code snippets, they are mainly here for your reference a
 #### Traversal Pseudocode
 
 ```javascript
-ALGORTIHM includes (searchVal)
+ALGORITHM includes (searchVal)
 	// INPUT  <-- integer value
 	// OUTPUT <-- boolean
 
