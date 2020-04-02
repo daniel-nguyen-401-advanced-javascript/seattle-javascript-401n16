@@ -179,7 +179,7 @@ Connection: close
 #### Running JSON-Server
 
 ```bash
-json-server --watch=<PATH_TO_JSON_DATA>
+json-server --watch <PATH_TO_JSON_DATA>
 ```
 
 ## Discussion Questions
