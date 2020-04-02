@@ -1,7 +1,3 @@
-
-
-
-
 # Class 07 --- Express
 
 ## Lecture Videos
@@ -78,26 +74,26 @@ The `response` object (often abbreviated to `res`) typically contains:
 
 When building out our handler functions (often referred to as our **endpoints**), there's a lot we can do. The handler functions can contain any code we wish, but sometimes it's helpful to modularize that code. What if you wanted to break your one large handler function into 5 sepearate functions that are meant to be executed in a specific order? This is where Express **middleware** comes in.
 
-Express middleware is just a function that is called. What makes it "middleware" is that this function is called in-between the received request and returned response. 
+Express middleware is just a function that is called. What makes it "middleware" is that this function is called in-between the received request and returned response.
 
 ![Express Middleware Execution](./assets/express-middleware.png)
 
-As shown in the diagram above, Express has three kinds of middleware: 
+As shown in the diagram above, Express has three kinds of middleware:
 
-- Application Middleware
-  - Run whenever the server receives a request
-  - Useful for generic server actions like JSON parsing, error handling, etc. 
-  - Can be set to run only when a request belongs to a specific method (`GET`, `POST`, `PUT`, `DELETE`)
-- Route Middleware 
-  - Runs whenever the server receives a request to a specific url endpoint 
-  - Will execute for any method request on that route (`GET`, `POST`, `PUT`, `DELETE`)
-  - Useful for authentication, authorization, etc. 
-- Handler Middleware
-  - Runs when the server receives a specific method request (`GET`, `POST`, `PUT`, `DELETE`) to a specific route
-  - The handler allows you to provide a list of functions
-  - This list is exectued from left to right
+-   Application Middleware
+    -   Run whenever the server receives a request
+    -   Useful for generic server actions like JSON parsing, error handling, etc.
+    -   Can be set to run only when a request belongs to a specific method (`GET`, `POST`, `PUT`, `DELETE`)
+-   Route Middleware
+    -   Runs whenever the server receives a request to a specific url endpoint
+    -   Will execute for any method request on that route (`GET`, `POST`, `PUT`, `DELETE`)
+    -   Useful for authentication, authorization, etc.
+-   Handler Middleware
+    -   Runs when the server receives a specific method request (`GET`, `POST`, `PUT`, `DELETE`) to a specific route
+    -   The handler allows you to provide a list of functions
+    -   This list is exectued from left to right
 
-"Handler Middleware" is often the least referred to as "middleware", though it operates in a similar pattern. With this collection of middleware, developers can have a lot of control over how their server responds to different kinds of requests. Express truly enables JavaScript developers to create a complex and efficient web server in a short amount of time! 
+"Handler Middleware" is often the least referred to as "middleware", though it operates in a similar pattern. With this collection of middleware, developers can have a lot of control over how their server responds to different kinds of requests. Express truly enables JavaScript developers to create a complex and efficient web server in a short amount of time!
 
 ### External Reading / Viewing
 
@@ -136,73 +132,73 @@ Feel free to skim these code snippets, they are mainly here for your reference a
 
 ```javascript
 app.post('/products', (req, res) => {
-	// CREATE PRODUCT
-})
+    // CREATE PRODUCT
+});
 
 app.get('/products', (req, res) => {
-	// READ PRODUCTS
+    // READ PRODUCTS
 });
 
 app.put('/products/:id', (req, res) => {
-	// UPDATE PRODUCT WITH ID req.params.id
-})
+    // UPDATE PRODUCT WITH ID req.params.id
+});
 
 app.delete('/products/:id', (req, res) => {
-	// DELETE PRODUCT WITH ID req.params.id
-})
+    // DELETE PRODUCT WITH ID req.params.id
+});
 ```
 
-#### Application Middleware 
+#### Application Middleware
 
 ```JavaScript
 app.use( (req, res, next) => {
 	// application middleware code
 	// this code runs for EVERY request from ANY client
-  
+
 	// call the next middleware in the chain
-  next(); 
+  next();
 });
 ```
 
 #### Application Error Middleware
 
-Raising an error: 
+Raising an error:
 
 ```JavaScript
-next('error object'); 
+next('error object');
 ```
 
-Creating an error handler: 
+Creating an error handler:
 
 ```javascript
-app.use( (err, req, res, next) => {
-	// executes every time an error is raised
-})
+app.use((err, req, res, next) => {
+    // executes every time an error is raised
+});
 ```
 
-#### Handler Middleware 
+#### Handler Middleware
 
 ```JavaScript
 const first = (req, res, next) => {
-  // the first handler middleware function to run 
-  next(); 
+  // the first handler middleware function to run
+  next();
 }
 
 const last = (req, res, next) => {
   // the last handler middleware function to run
-  res.send(); 
+  res.send();
 }
 
 // executes from left to right
-app.get('/products', first, last); 
+app.get('/products', first, last);
 ```
 
 ## Discussion Questions
 
 Create a new markdown page in your reading notes repo for this class. On that page, answer the following questions. You will not be graded on correctness, but rather on your attempt to answer the question. Once you've created your new page, submit a link to that page using the canvas discussion entry field. Links should be somewhat of the format `https://USERNAME.github.io/reading-notes/class-##-reading`.
 
-1. What code does the server actually run? 
-2. What Express/HTTP operations map to CRUD operations? 
-3. What does `res.send()` do? 
-4. What is the order of operations for the three categories of middleware (handler, application, route)? 
-5. What is the parameter `next` used for? 
+1. What code does the server actually run?
+2. What Express/HTTP operations map to CRUD operations?
+3. What does `res.send()` do?
+4. What is the order of operations for the three categories of middleware (handler, application, route)?
+5. What is the parameter `next` used for?
