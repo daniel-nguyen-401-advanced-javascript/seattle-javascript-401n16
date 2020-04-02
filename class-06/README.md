@@ -78,9 +78,9 @@ Let's break these URLs down:
 -   `/notes` - Another REST guideline, this is used to specify what type of data you're attempting to access. You can think of this as being a 1:1 match with a collection in your MongoDB database, though there is no enforced correlation
 -   `/notes/12345` - Another REST guideline, specifying that `12345` is the ID of the record you're trying to access
 
-Remember, REST is just a collection of guidelines - there's no enforced limitation on how your API should be structured.It is encouraged to use REST guidelines when building APIs, so that various servers can have some sense of consistency. If every API adopts the same standards, it makes it easier for clients to understand how to use your API!
+Remember, REST is just a collection of guidelines - there's no enforced limitation on how your API should be structured. It is encouraged to use REST guidelines when building APIs, so that various servers can have some sense of consistency. If every API adopts the same standards, it makes it easier for clients to understand how to use your API!
 
-REST guidelines also call for a standard way to document APIs. Dynamically generated documentation is preferred so that it is always up-to-date with any changes to your API. **Swagger** is a service that makes it very easy to set up dynamically generating documentation for your APIs, so we'll be utilizing Swagger in this course!
+REST guidelines also call for a standard way to document APIs. Dynamically generated documentation is preferred so that it is always up-to-date with any changes to your API. **Swagger** is a service that makes it very easy to set up dynamically generating documentation for your APIs, so we'll be utilizing Swagger in this course.
 
 ### External Reading / Viewing
 
