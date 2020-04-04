@@ -90,7 +90,6 @@ You must also have 404 and 500 error handling built in, as well as timestamp and
    		500.js 
    		logger.js
    		timestamp.js
-   		fake-server-error.js
    ```
 
 6. Setup GitHub Actions so that your code will be properly tested on each push ([instructions](../../reference/github-actions.md))
