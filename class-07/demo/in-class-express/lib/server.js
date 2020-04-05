@@ -4,7 +4,9 @@ const express = require('express');
 
 let data = require('../in-class-db.json');
 const notFound = require('./middleware/404.js');
+const timestamp = require('./middleware/timestamp.js');
 const logger = require('./middleware/logger.js');
+const serverError = require('./middleware/500.js');
 
 // Define our server as "app"
 // express() creates a server object with a lot of junk
@@ -12,6 +14,7 @@ const app = express();
 
 // Application Middleware
 app.use(express.json());
+app.use(timestamp);
 app.use(logger);
 
 const startServer = (port) => {
@@ -27,15 +30,13 @@ const startServer = (port) => {
 // browser is making a request to GET / === GET http://localhost:3000/
 // currently, browser is not getting a response! Let's write one
 
-// req = request object
-// res = response object
+/**
+ * This route gives you a standard "Homepage" message
+ * @route GET /
+ * @param {string} name.query - a name field which adds a welcome message
+ * @returns {object} 200 - The HTML to show on the homepage
+ */
 app.get('/', (req, res, next) => {
-    // receive req from client
-    console.log('Headers:', req.headers);
-    console.log('Body:', req.body);
-    console.log('Params:', req.params);
-    console.log('Query:', req.query);
-
     let homeHTML = '<div><h1>Homepage</h1>';
 
     if (req.query.name)
@@ -47,8 +48,17 @@ app.get('/', (req, res, next) => {
     res.send(homeHTML);
 });
 
-// Products Routes
-// Create - POST
+app.get('/throw-err', (req, res, next) => {
+    next('this is my error');
+});
+
+/**
+ * This route allows you to create a fruit
+ * @route POST /fruits
+ * @group fruits
+ * @returns {object} 201 - The created object
+ * @returns {Error} - If there was an issue creating in the db
+ */
 app.post('/fruits', (req, res, next) => {
     // what we want to make
     // is probably in req.body
@@ -84,7 +94,14 @@ app.get(
     },
 );
 
-// Update - PUT/PATCH
+/**
+ * This route allows you to update a fruit
+ * @route PUT /fruits/:id
+ * @group fruits
+ * @param {Number} id.params.required - the id of the field you want to update
+ * @returns {object} 200 - The updated object
+ * @returns {Error} - If there was an issue updating in the db
+ */
 app.put('/fruits/:id', (req, res, next) => {
     data.fruits[parseInt(req.params.id) - 1] = {
         ...req.body,
@@ -111,6 +128,7 @@ app.put('/vegetables/:id', (req, res, next) => {});
 app.delete('/vegetables/:id', (req, res, next) => {});
 
 app.use('*', notFound);
+app.use(serverError);
 
 module.exports = {
     server: app,

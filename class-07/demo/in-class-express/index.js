@@ -3,4 +3,5 @@
 
 const app = require('./lib/server.js');
 
-app.start(3000);
+let port = process.env.PORT || 3000;
+app.start(port);
