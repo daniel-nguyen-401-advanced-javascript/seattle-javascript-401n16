@@ -7,10 +7,13 @@ const notFound = require('./middleware/404.js');
 const timestamp = require('./middleware/timestamp.js');
 const logger = require('./middleware/logger.js');
 const serverError = require('./middleware/500.js');
+const generateSwagger = require('../docs/swagger.js');
 
 // Define our server as "app"
 // express() creates a server object with a lot of junk
 const app = express();
+
+generateSwagger(app);
 
 // Application Middleware
 app.use(express.json());
@@ -26,9 +29,6 @@ const startServer = (port) => {
         console.log('Server is up and running on port', port);
     });
 };
-
-// browser is making a request to GET / === GET http://localhost:3000/
-// currently, browser is not getting a response! Let's write one
 
 /**
  * This route gives you a standard "Homepage" message
@@ -96,23 +96,71 @@ app.get(
 
 /**
  * This route allows you to update a fruit
- * @route PUT /fruits/:id
+ * @route PUT /fruits/{id}
  * @group fruits
- * @param {Number} id.params.required - the id of the field you want to update
+ * @param {Number} id.path - the id of the field you want to update
  * @returns {object} 200 - The updated object
  * @returns {Error} - If there was an issue updating in the db
  */
-app.put('/fruits/:id', (req, res, next) => {
-    data.fruits[parseInt(req.params.id) - 1] = {
-        ...req.body,
-        id: parseInt(req.params.id),
-    };
+app.put(
+    '/fruits/:id',
+    (req, res, next) => {
+        // the goal of put
+        // a full update - we usually are given the ENTIRE object
+        // all the key values, this is a full find-replace
+        // the request should send me the "new" record
+        // in request.body
+        // { name: 'red apple', count: 15 }
 
-    res.send(data.fruits[parseInt(req.params.id) - 1]);
+        if (req.params.id > data.fruits.length) {
+            next();
+            return;
+        }
+
+        console.log('SHOULD NOT BE HERE IF ID > 3');
+
+        // full replace foundRecord with request.body
+        let modifiedRecord = req.body;
+        modifiedRecord.id = req.params.id;
+
+        // replace in database
+        data.fruits[req.params.id - 1] = modifiedRecord;
+        res.send(modifiedRecord);
+    },
+    notFound,
+);
+
+app.patch('/fruits/:id', (req, res, next) => {
+    // the goal of patch
+    // a merge-update - we are given pieces of the object
+    // some key-values, and we want to merge with existing
+    // record, replacing ONLY the keys that are duplicates
+
+    // in request.body
+    // { count: 15 }
+
+    // find existing record
+    let foundRecord = data.fruits[req.params.id - 1];
+
+    // merge with req.body
+    let modifiedRecord = { ...foundRecord, ...req.body };
+
+    // replace in database
+    data.fruits[req.params.id - 1] = modifiedRecord;
+    res.send(modifiedRecord);
 });
 
 // Delete - DELETE
-app.delete('/fruits/:id', (req, res, next) => {});
+app.delete('/fruits/:id', (req, res, next) => {
+    let fruits = data.fruits;
+
+    data.fruits = fruits.filter((val) => {
+        if (val.id === parseInt(req.params.id)) return false;
+        else return true;
+    });
+
+    res.send(data.fruits);
+});
 
 // Categories Routes
 // Create - POST
