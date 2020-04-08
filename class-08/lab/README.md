@@ -7,38 +7,66 @@ In this lab, you will be building off of your Express server from Lab 07, adding
 Your application will have all CRUD endpoints for `categories` and `products`, which accurately change data stored in a MongoDB database. 
 
 ```bash
-GET /categories
+GET /api/v1/categories
 ```
+
+- Returns an object of the format `{count, results}`, where `count` is the number of `results`
 
 ```bash
-POST /categories
+GET /api/v1/categories/:id
 ```
+
+* Returns a single category object 
 
 ```bash
-PUT /categories/:id/
+POST /api/v1/categories
 ```
+
+* Returns the created category object
 
 ```bash
-DELETE /categories/:id/
+PUT /api/v1/categories/:id
 ```
+
+* Returns the updated category object
 
 ```bash
-GET /products
+DELETE /api/v1/categories/:id
 ```
+
+* Returns the id of the record deleted
 
 ```bash
-POST /products
+GET /api/v1/products
 ```
+
+* Returns an object of the format `{count, results}`, where `count` is the number of `results`
 
 ```bash
-PUT /products/:id/
+GET /api/v1/products/:id
 ```
+
+* Returns a single product object
 
 ```bash
-DELETE /products/:id/
+POST /api/v1/products
 ```
 
-You must also have 404 and 500 error handling built in, as well as timestamp and logging for all of your received requests. 
+* Returns the created product object
+
+```bash
+PUT /api/v1/products/:id
+```
+
+* Returns the updated product object
+
+```bash
+DELETE /api/v1/products/:id
+```
+
+* Returns the id of the record deleted
+
+You must also have 404 and 500 error handling built in, as well as logging using the package `morgan`. 
 
 ## Getting Started
 
@@ -48,7 +76,7 @@ You must also have 404 and 500 error handling built in, as well as timestamp and
 
    * Note that this will be your development database
    * Fill this database with some products and categories, similar to your `db.json` file from Lab 07
-   * Create a duplicate "production" database, either through Mongo Atlas or Heroku mLab and fill it with the same starting data - do not modify this database while developing
+   * Create a duplicate "production" database, either through Mongo Atlas or Heroku mLab and fill it with the same starting data - do not modify this production database while developing
 
 3. Add a `README.md` fo your lab, using the [`README-TEMPLATE.md` file](../../reference/submission-instructions/labs/README-template.md) as a starting point
 
@@ -69,7 +97,7 @@ You must also have 404 and 500 error handling built in, as well as timestamp and
      "test-watch": "jest --watchAll --verbose --coverage"
      ```
 
-5. Create a `.env` file which contains a variable called `MONGODB_URI` set to your local/development MongoDB url
+5. Create a `.env` file which contains a variable called `MONGODB_URI` set to your local/development MongoDB url. You may also add a `PORT` variable to the `.env` file. 
 
 6. Set up the file structure for this lab according to the following outline: 
 
@@ -98,18 +126,18 @@ You must also have 404 and 500 error handling built in, as well as timestamp and
    		500.js 
    	/models
    		model.js
-   		products-schema.js
    		categories-schema.js
+   		products-schema.js
    	/routes
-   		products.js
    		categories.js
+   		products.js
    ```
 
 7. Setup GitHub Actions so that your code will be properly tested on each push ([instructions](../../reference/github-actions.md))
 
 ## Implementation 
 
-Your major implementation task will be build a server with the same functionalities as your Express server from Lab 07, though this time we'll actually be modifying persisted data by using MongoDB. 
+Your major implementation task will be build a server with the same functionalities as your Express server from Lab 07, though this time we'll actually be modifying persisted data using Mongoose and MongoDB. 
 
 > The following outline below is a suggested implementation. Note that your lab does NOT have to constrain itself to these suggestions; there are many ways to code an application and we encourage creativity and unique approaches! This suggested implementation is primarily for anyone who is having trouble knowing where/how to start. 
 
@@ -123,13 +151,29 @@ You will have two different urls for your MongoDB; one that's your development d
 
 This is your main server file, which defines all the server functionality. This file should export a server object and a start function. It should also assign all the middleware this server is using (404, 500, `morgan` and `cors`). Your server should utilize all the routes for CRUD operations upon products and categories, and these routes should be individually defined in `/routes/products.js` and `/routes/categories.js`.
 
+### lib/middleware
 
+In your middleware folder, you should have one file defined for each of the required middleware functions. These files should each export their middleware function. Here's an overview of the required middleware: 
 
-### db.json
+#### 404.js
 
-This is ideally the same file as used in your Lab 06, where some sample categories and products data is defined. This file should have two arrays, `categories` and `products`, each with 2-3 objects inside them. These objects should follow the defined schema below:
+When a client attempts to make a request to a route that is not explicitly defined in `server.js`, the 404 middleware should set the response status to `404` and the response status message to 'Resource Not Found'. You can then choose what you would like to send in the response body; either an error object, an error string, or nothing! 
 
-#### Categories Schema
+#### 500.js 
+
+This file is proper error middleware for your server, and thus should export a function with four parameters instead of three. Within the function body, set the response status to 500 and the response status message to 'Internal Server Error'. You can then choose what you would like to send in the response body; either an error object, an error string, or nothing! Now that we're connected to MongoDB, think of when it might be applicable to call this 500 error in your routes. 
+
+### lib/models
+
+This folder should include your generic model class, similar to what we built in Lab 04. It should also include the schema definitions and Mongoose models for products and categories. 
+
+#### model.js
+
+This should export a generic model class which takes a Mongoose schema/model as a constructor parameter and defines what MongoDB commands should be called in each CRUD operation. 
+
+#### categories-schema.js
+
+In this file, you should define a Mongoose schema and export a Mongoose model. Your schema should mimic the below ruleset: 
 
 ```javascript
 {
@@ -140,7 +184,9 @@ This is ideally the same file as used in your Lab 06, where some sample categori
 }
 ```
 
-#### Products Schema
+#### products-schema.js
+
+In this file, you should define a Mongoose schema and export a Mongoose model. Your schema should mimic the below ruleset: 
 
 ```javascript
 {
@@ -152,53 +198,44 @@ This is ideally the same file as used in your Lab 06, where some sample categori
 }
 ```
 
-### lib/server.js
+### lib/routes
 
-This is your main server file, which defines all the server functionality. This file should export a server object and a start function. It should also assign all the middleware this server is using (404, 500, timestamp, logging), defined in `lib/middleware`. Your server should define all the routes for CRUD operations upon products and categories from `db.json`.
+In this folder, you should define the route handlers for `/products` and `/categories`, so that they can be imported into `server.js` and help modularize `server.js`. 
 
-Note that you do NOT have to modify the `db.json` file when the CRUD operations are executed. Instead, when your server runs, your `server.js` file should import the contents of `db.json` and save that as an object. Then, any CRUD routes can modify or return this in-memory object. 
+#### categories.js
 
-```javascript
-let db = require('../db.json'); 
-```
+This file should hold all the routes related to CRUD operations upon categories. The file should export an Express Router object.
 
-> Here, we want to use a `let` instead of `const`, because we are copying over the JSON content as a JavaScript object and may modify the JavaScript object during our CRUD operations (whereas `const` should not be modified). This should not affect the `db.json` file. 
+#### products.js
+
+This file should hold all the routes related to CRUD operations upon products. This file should export an Express Router object. 
 
 ### docs/swagger.js
 
 This file should contain your `express-swagger-generator` documentation. See Code Documentation/Cleanliness section of Lab Submission. 
 
-### lib/middleware
+### __tests__
 
-In your middleware folder, you should have one file defined for each of the required middleware functions. These files should each export their middleware function. Here's an overview of the required middleware: 
+#### server.test.js
 
-#### 404.js
+In your server test file, use the npm package `@code-fellows/supergoose` to help facilitate testing your Express server. You should test all your defined endpoints, ensuring that the status code, message and returned body (if a body is returned) match expectations. 
 
-When a client attempts to make a request to a route that is not explicitly defined in `server.js`, the 404 middleware should set the response status to `404` and the response status message to 'Resource Not Found'. You can then choose what you would like to send in the response body; either an error object, an error string, or nothing! 
+#### categories-model.test.js
 
-#### 500.js 
+This file should test all of the MongoDB operations upon the categories model. The tests here should be similar to your Lab 04 model tests.
 
-This file is proper error middleware for your server, and thus should export a function with four parameters instead of three. Within the function body, set the response status to 500 and the response status message to 'Internal Server Error'. You can then choose what you would like to send in the response body; either an error object, an error string, or nothing!
+#### products-model.test.js
 
-#### timestamp.js
-
-This middleware creates a timestamp (a new Date object) and assigns it as a new key-value pair on the request object. The key name of this new property should be `requestTime`. 
-
-#### logger.js
-
-This middleware logs out a message containing the time the request was received, the method of the request, and the url/path of the request. 
-
-### server.test.js
-
-In your server test file, use the npm package `supergoose` to help facilitate testing your Express server. You should test all your defined endpoints, ensuring that the status code, message and returned body (if a body is returned) match expectations. 
+This file should test all of the MongoDB operations upon the products model. The tests here should be similar to your Lab 04 model tests.
 
 ## Lab Submission 
 
-In order to submit this lab, you will need to provide a link to your lab `README.md`, AND you will need to deploy your server application to Heroku. 
+In order to submit this lab, you will need to provide a link to your lab `README.md`, AND you will need to deploy your server application to Heroku. Your deployed Heroku app should be connected to your "production" database instead of your development database. 
 
 * Heroku deployment
   * Set up automatic deployments on Heroku with your lab repository
   * Ensure that once deployed, you can use a tool like Postman or [this sample react application](https://w638oyk7o8.csb.app/) to access endpoints at your new Heroku URL
+  * Ensure that you can modify data in your production database
   * In your `README.md` be sure to provide a link to your deployed Heroku server
 * `README.md`
   * Ensure your lab `README.md` is well detailed in how to install and run your application
@@ -220,91 +257,10 @@ In order to submit this lab, you will need to provide a link to your lab `README
     * Note that you do not have to generate a JSDoc hosted website, just the commenting in your code files will suffice
   * Ensure that all of your Express endpoints are documented with JSDoc-like Swagger comments, and that you can generate your swagger documentation using `express-swagger-generator`
     * [Official Documentation](https://github.com/pgroot/express-swagger-generator) 
-    * Be sure to put all of your `express-swagger-generator` configuration in your `/docs/swagger.js` file
+    * [Sample swagger.js File](https://github.com/codefellows/seattle-javascript-401n16/blob/master/reference/swagger.js)
+    * Be sure to put all of your `express-swagger-generator` configuration in your `/docs/swagger.js` file, and then import and call the module function in `server.js`
     * Be sure to provide a link to your generated Swagger documentation in your `README.md`
-      * This should typically be `<your server url>/api-docs`
+      * This should typically be `<your deployed server url>/api-docs`
 * Canvas Submission
   * Submit a link to your lab's `README.md` 
   * Once your lab has been graded for the first time, you may resubmit the link to your lab's `README.md` exactly once for a regrade
-
-
-
-# LAB - Express Routing & Connected API
-
-Create well architected, multiple resource (model) API server, connected to a Mongo Database
-
-## Before you begin
-
-Refer to *Getting Started*  in the [lab submission instructions](../../../reference/submission-instructions/labs/README.md) for complete setup, configuration, deployment, and submission instructions.
-
-## Getting Started
-
-> Building off of your previous day's branch, create a new branch for today and continue to work in your 'api-server' repository.
-
-Remember to bring in the dependencies for your app...
-
-- npm install: cors, morgan, dotenv, mongoose, @code-fellows/supergoose
-- If not already running, start mongo server: `mongod --dbpath=/Users/path/to/data/db`
-
-## Requirements
-
-### Features
-
-Create an API server with the following features
-
-- Express server, connected to a mongo database
-- Morgan Logger
-- CORS Protection
-- Error Handling
-- 2 Mongo Connected Data Models: categories and products
-- Full set of CRUD routes for each model (categories and products), with an `/api/v1` base
-  - Routes should return the proper HTTP status codes based on the actual result of the operation
-  - GET /api/v1/categories
-    - Returns an object with 2 keys: `count` (number) and `results` (array of objects/records from the database)
-  - GET /api/v1/categories/ID
-    - Takes an ID as a route parameter
-    - Returns a single object (the record from the database)
-  - POST /api/v1/categories
-    - Accepts a full record object to be added to the DB as the request body
-    - Returns a single object (the record added to the database)
-  - PUT /api/v1/categories/ID
-    - Takes an ID as a route parameter
-    - Accepts a full record, including id, to be updated as the request body
-    - Returns a single object (the record as updated in the database)
-  - DELETE /api/v1/categories/ID
-    - Takes an ID as a route parameter
-    - Returns undefined or null (the record is no longer in the database)
-
-### Implementation Requirements
-
-- Import the mongo data models (categories and products) from your earlier data modeling lab.
-  - Put them in a `models` folder in your source tree along with the interface
-- Write supergoose tests to verify that your routes are functioning
-  - /post saves a new record
-  - /get gets all records
-  - ...etc
-- Routes and handler functions must be modular (via `express.router()`)
-  - They should go into a `routes` folder as separate files
-    - One for categories
-    - One for products
-  - They will need to export an express router instance
-  - The app will now need to import and use these routes
-- Note: Once you've moved the routes out, the tests that you wrote should still work.
-
-### Testing
-
-- Using `supergoose`, Write a complete set of data model and server tests
-- Refer to your previous assignments for examples and inspiration
-
-#### Web Server Visual Tests
-
-- Open this [React Application](https://w638oyk7o8.csb.app/)
-- In the form at the top of the page, enter the URL to your API Server
-- This server is configured to use the routes noted in the first lab requirement
-- If your lab is working, this app will show your API Data!
-
-**Engineering Note** This is a main benefit of testing -- asserting that major changes don't effect functionality!
-
-## Assignment Submission Instructions
-
-Refer to the the [Submitting Express Server Lab Submission Instructions](../../../reference/submission-instructions/labs/express-servers.md) for the complete lab submission process and expectations
