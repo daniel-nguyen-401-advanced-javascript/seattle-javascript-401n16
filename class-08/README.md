@@ -154,7 +154,7 @@ app.use(products);
 ```javascript
 const products = require('./routes/products.js'); 
 
-app.use('products', products); 
+app.use('/products', products); 
 ```
 
 ## Discussion Questions
