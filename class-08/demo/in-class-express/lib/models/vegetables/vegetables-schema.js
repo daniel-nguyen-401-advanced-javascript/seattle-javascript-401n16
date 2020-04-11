@@ -7,5 +7,8 @@ const schema = mongoose.Schema({
     count: { type: 'Number', required: true },
 });
 
-const model = mongoose.model('fruits', schema);
+// Mongoose is creating a model
+// that model has access to MongoDB operations
+// like .save(), .find(), etc.
+const model = mongoose.model('vegetables', schema);
 module.exports = model;

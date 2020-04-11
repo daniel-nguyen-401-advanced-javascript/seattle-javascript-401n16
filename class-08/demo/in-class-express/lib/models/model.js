@@ -1,5 +1,11 @@
 'use strict';
 
+// in between our JS code and our Mongoose generated model
+// simplifies our CRUD operations so that devs don't
+// have to know about MongoDB specifics (.save, .find)
+
+// connecting model to fruits and vegetables (prod, cat)
+
 class Model {
     constructor(schema) {
         this.schema = schema;
