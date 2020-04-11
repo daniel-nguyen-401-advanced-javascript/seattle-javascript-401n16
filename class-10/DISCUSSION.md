@@ -1,3 +1,61 @@
+# Class 10 --- Authentication
+
+## Lecture Videos
+
+[Tuesday]() || [Wednesday]()
+
+## Lecture Overview
+
+
+
+At the end of this class, you'll be able to:
+
+-   [x] Understand Mongoose virtual joins
+-   [x] Understand Mongoose sub documents
+-   [x] Understand Express request `param` object in more detail
+-   [x] Manage the lifecycle of your data model with pre and post middleware 
+-   [x] Use param middleware to create dynamic model routes
+
+Prior to class, review the readings below and answer the discussion questions in your reading repository.
+
+## Reading
+
+### External Reading / Viewing
+
+Save or skim through the following links to help broaden your understanding.
+
+| Links |
+| ----- |
+|       |
+|       |
+|       |
+|       |
+|       |
+
+### Vocabulary
+
+Familiarize yourself with the following vocabulary terms. We will be covering their definitions in class.
+
+| Term |
+| ---- |
+|      |
+|      |
+|      |
+|      |
+|      |
+|      |
+|      |
+
+### Handy Code Snippets
+
+Feel free to skim these code snippets, they are mainly here for your reference after class lectures.
+
+## Discussion Questions
+
+Create a new markdown page in your reading notes repo for this class. On that page, answer the following questions. You will not be graded on correctness, but rather on your attempt to answer the question. Once you've created your new page, submit a link to that page using the canvas discussion entry field. Links should be somewhat of the format `https://USERNAME.github.io/reading-notes/class-##-reading`.
+
+1. 
+
 # Readings: Authentication
 
 Below you will find some reading material, code samples, and some additional resources that support today's topic and the upcoming lecture.
