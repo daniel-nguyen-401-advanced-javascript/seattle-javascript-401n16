@@ -45,7 +45,7 @@ Save or skim through the following links to help broaden your understanding.
 
 | Links                                                        |
 | ------------------------------------------------------------ |
-| [Securing Passwords](http://dustwell.com/how-to-handle-passwords-bcrypt.html) |
+| [Securing Passwords](http://cs.wellesley.edu/~cs304/lectures/bcrypt/dustwell.html) |
 | [Basic Auth](https://en.wikipedia.org/wiki/Basic_access_authentication) |
 | [OWASP Auth Cheatsheet](https://www.owasp.org/index.php/Authentication_Cheat_Sheet) |
 | [Bcrypt Documentation](https://www.npmjs.com/package/bcrypt) |
