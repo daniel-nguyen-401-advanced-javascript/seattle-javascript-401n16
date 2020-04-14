@@ -113,7 +113,7 @@ You must also have 404 and 500 error handling built in, as well as logging using
 
 ## Implementation
 
-Your major implementation task will be build upon your server from Lab 08, though this time we'll generalize our routes implementation by using `req.params`, and by creating the `model-finder` middleware.
+Your major implementation task will be to build upon your server from Lab 08, though this time we'll generalize our routes implementation by using `req.params`, and by creating the `model-finder` middleware.
 
 > The following outline below is a suggested implementation. Note that your lab does NOT have to constrain itself to these suggestions; there are many ways to code an application and we encourage creativity and unique approaches! This suggested implementation is primarily for anyone who is having trouble knowing where/how to start.
 

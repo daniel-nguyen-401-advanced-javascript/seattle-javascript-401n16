@@ -61,7 +61,7 @@ class Model {
 
 In this class, we're going to be talking about mongoose **middleware**, and how it can add another layer to our data manipulation. Middleware typically means "software between two other softwares" - you can think of it as a middleman between two operations that helps the process go more smoothly. When thinking of our application and our database, conceptually mongoose can already be viewed as middleware:
 
-![Middleware with Mongoose](/Users/soniakandah/cf/n16/class-04/assets/middleware-01.png)
+![Middleware with Mongoose](./assets/middleware-01.png)
 
 Mongoose itself has additional middleware options for actions between the application code and mongoose model, or between the mongoose model and MongoDB.
 
