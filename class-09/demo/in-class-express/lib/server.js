@@ -26,13 +26,14 @@ const startServer = (port, mongodb) => {
 generateSwagger(app);
 
 // middleware
+app.use(express.json());
 app.use(cors());
 app.use(morgan('dev'));
 
 // this is going to run for EVERY REQUEST
 // we really only want to use this when :model is in the path
 app.use((req, res, next) => {
-    console.log('RUNS FOR ALL!');
+    console.log('Run Custom App Middleware (just a console log)');
     next();
 });
 

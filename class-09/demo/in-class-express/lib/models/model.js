@@ -18,12 +18,6 @@ class Model {
         // findOne with that id
 
         let record = await this.schema.findOne({ _id });
-        record = await record.populate();
-        console.log('Full Dept', record.fullDept);
-        console.log('Full String', record.fullString);
-
-        record.fullString = 'changed';
-        console.log('Full String after Change', record.fullString);
         return record;
     }
 
@@ -32,7 +26,25 @@ class Model {
         return results;
     }
 
-    async update() {}
+    // Application -> Mongoose -> MongoDB
+    async update(_id, newRecordContent) {
+        console.log(
+            'Run Model update function (id:',
+            _id,
+            ', newRecord: ',
+            newRecordContent,
+            ')',
+        );
+
+        // do the mongoose commands to find a record by id and update it
+
+        let result = await this.schema.updateOne({ _id }, newRecordContent);
+        if (result && result.nModified === 1) {
+            let modifiedRecord = await this.read(_id);
+            return modifiedRecord;
+        }
+        return 'error';
+    }
 
     async delete() {}
 }

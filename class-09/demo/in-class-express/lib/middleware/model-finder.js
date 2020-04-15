@@ -7,6 +7,8 @@ const Model = require('../models/model.js');
 const modelFinder = (req, res, next) => {
     // valid models are: 'products' and 'categories'
 
+    console.log('Run Route Middleware (modelFinder, setting req.colModel)');
+
     switch (req.params.model) {
         case 'fruits':
             console.log('found model fruits');

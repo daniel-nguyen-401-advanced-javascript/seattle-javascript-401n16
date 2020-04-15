@@ -35,8 +35,15 @@ router.get('/:model/:id', async (req, res, next) => {
     res.send(result);
 });
 
-// Update Single
-router.put('/:model/:id', (req, res, next) => {});
+// Update Single (new record in req.body)
+// Client -> Server -> Client
+router.put('/:model/:id', async (req, res, next) => {
+    console.log('Run update route (/:model/:id)');
+    let result = await req.colModel.update(req.params.id, req.body);
+    res.send(result);
+    // if I'm here, then I should have req.colModel set
+    // to an instance of the Model class (b/c that's what my route middleware did!)
+});
 
 // Delete Single
 router.delete('/:model/:id', (req, res, next) => {});
