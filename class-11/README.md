@@ -2,7 +2,7 @@
 
 ## Lecture Videos
 
-[Saturday Morning]() || [Saturday Afternoon]()
+[Saturday Morning](https://www.youtube.com/watch?v=rzc_DW29ESg) || [Saturday Afternoon](https://www.youtube.com/watch?v=PcCiyknTuX4)
 
 ## Lecture Overview
 
@@ -46,7 +46,7 @@ Pushing a `Node` onto a stack will always be an `O(1)` operation. This is becaus
 Let's walk through the steps:
 
 1. First, you should have the `Node` that you want to add. Here is an example of a `Node` that we want to add to the stack
-    
+   
     ![Push to Stack 01](assets/pushStack1.png)
 2. Next, you need to assign the `next` property of `Node 5` to reference the same `Node` that `top` is referencing: `Node 4`
 
@@ -65,15 +65,15 @@ Let's try and `pop` off `Node 5` from the stack. Here is a visual of the current
 ![Pop from Stack 01](assets/popStack1.png)
 
 1. The first step of removing `Node 5` from the stack is to create a reference named `temp` that points to the same `Node` that `top` points to.
-    
+   
     ![Pop from Stack 02](assets/popStack2.png)
     
 1. Once you have created the new reference type, you now need to re-assign `top` to the value that the `next` property is referencing. In our visual, we can see that the `next` property is pointing to `Node 4`. We will re-assign `top` to be `Node 4`.
-    
+   
     ![Pop from Stack 03](assets/popStack3.png)
     
 1. We can now remove `Node 5` safely without it affecting the rest of the stack. Before we do that though you may want to make sure that you clear out the `next` property in your current `temp` reference. This will ensure that no further references to `Node 4` are floating around the heap. This will allow our garbage collector to cleanly and safely dispose of the `Nodes` correctly.
-    
+   
     ![Singly Linked List](assets/popStack4.png)
     
 1. Finally, we return the value of the `temp` `Node` that was just popped off.
@@ -101,10 +101,10 @@ Let's walk through the process of adding a Node to a queue:
 ![Enqueue 01](assets/Enqueue1.png)
 
 1. First, we should change the `next` property of `Node 4` to point to the Node we are adding. In our case with the visual below, we will be re-assigning `Node 4`'s `.next` to `Node 5`. The only way we have access to `Node 4` is through our reference `rear`. Following the rules of reference types, this means that we must change `rear.next` to `Node 5`.
-    
+   
     ![Enqueue 02](assets/Enqueue2.png)
 1. After we have set the `next` property, we can re-assign the `rear` reference to point to `Node 5`. By doing this, it allows us to keep a reference of where the `rear` is, and we can continue to `enqueue` Nodes into the queue as needed.
-    
+   
     ![Enqueue 03](assets/Enqueue3.png)
 1. Congratulations! You have just successfully added a Node to a queue by activating the `enqueue` action.
 
@@ -113,13 +113,13 @@ When you remove an item from a queue, you use the `dequeue` action. This is done
 Let's walk through the process of removing a Node from a queue.
 
 1. The first thing you want to do is create a temporary reference named `temp` and have it point to the same `Node` that `front` is pointing too. This means that `temp` will point to `Node 1`.
-    
+   
     ![Dequeue 01](assets/Dequeue1.png)
 1. Next, you want to re-assign `front` to the `next` value that the `Node` `front` is referencing. In our visual, this would be `Node 2`.
-    
+   
     ![Dequeue 02](assets/Dequeue2.png)
 1. Now that we have moved `front` to the second `Node` in line, we can next re-assign the `next` property on the `temp` `Node` to `null`. We do this because we want to make sure that all the proper `Nodes` clear any unnecessary references for the garbage collector to come in later and clean up.
-    
+   
     ![Dequeue 03](assets/Dequeue3.png)
 1. Finally, we return the value of the `temp` `Node` that was just removed.
 1. Congratulations! You have just successfully completed a `dequeue` action on a queue!
