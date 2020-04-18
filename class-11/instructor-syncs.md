@@ -24,3 +24,22 @@ These will take place from 8pm - 9:30pm
 | Brett P. | 8pm    |
 | Henok G. | 8:30pm |
 | Diana K. | 9pm    |
+
+## Wednesday
+
+These will take place from 8pm - 9:30pm
+
+| Student   | Time   |
+| --------- | ------ |
+| Sue D.    | 8pm    |
+| Randee O. | 8:30pm |
+| Sian C.   | 9pm    |
+
+## Thursday
+
+These will take place from 6:30pm - 9:30pm
+
+| Student     | Time   |
+| ----------- | ------ |
+| Blandine D. | 6:30pm |
+| Shubham M.  | 7pm    |
