@@ -6,7 +6,6 @@ These will take place from 11am - 12pm and 3pm - 6pm
 
 | Student    | Time    |
 | ---------- | ------- |
-| Joel W.    | 11am    |
 | Eyob T.    | 11:30am |
 | Daniel N.  | 3pm     |
 | Thomas T.  | 3:30pm  |
@@ -43,3 +42,4 @@ These will take place from 6:30pm - 9:30pm
 | ----------- | ------ |
 | Blandine D. | 6:30pm |
 | Shubham M.  | 7pm    |
+| Joel W.    | 7:30pm    |
