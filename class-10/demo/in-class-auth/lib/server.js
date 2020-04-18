@@ -8,9 +8,12 @@ const mongoose = require('mongoose');
 
 // Internal Resources
 const authRouter = require('./routes/auth-router.js');
+const generateSwagger = require('../docs/swagger.js');
 
 // Application-wide Middleware
 const app = express();
+
+generateSwagger(app);
 
 app.use(morgan('dev'));
 app.use(cors());
@@ -18,6 +21,11 @@ app.use(express.json());
 
 // Routes
 
+/**
+ * This route gives us a simple "Homepage" message
+ * @route GET /
+ * @returns {String} 200 - The string "Homepage"
+ */
 app.get('/', (req, res, next) => {
     res.send('Homepage');
 });
