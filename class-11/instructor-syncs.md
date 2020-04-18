@@ -6,7 +6,7 @@ These will take place from 11am - 12pm and 3pm - 6pm
 
 | Student    | Time    |
 | ---------- | ------- |
-| ~~Eyob T.    | 11:30am~~ |
+| ~~Eyob T.~~    | ~~11:30am~~ |
 | Tammy I. | 3pm     |
 | Thomas T.  | 3:30pm  |
 | Kory J.    | 4pm     |
