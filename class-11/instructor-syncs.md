@@ -6,12 +6,12 @@ These will take place from 11am - 12pm and 3pm - 6pm
 
 | Student    | Time    |
 | ---------- | ------- |
-| Eyob T.    | 11:30am |
-| Daniel N.  | 3pm     |
+| ~~Eyob T.    | 11:30am~~ |
+| Tammy I. | 3pm     |
 | Thomas T.  | 3:30pm  |
 | Kory J.    | 4pm     |
 | Madison S. | 4:30pm  |
-| Tammy I.   | 5pm     |
+| Daniel N.   | 5pm     |
 | Clayton J. | 5:30pm  |
 
 ## Tuesday
