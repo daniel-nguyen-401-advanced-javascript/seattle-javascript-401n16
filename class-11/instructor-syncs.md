@@ -7,7 +7,7 @@ These will take place from 11am - 12pm and 3pm - 6pm
 | Student    | Time    |
 | ---------- | ------- |
 | ~~Eyob T.~~    | ~~11:30am~~ |
-| Tammy I. | 3pm     |
+| ~~Tammy I.~~ | ~~3pm~~     |
 |  Henok G. | 3:30pm  |
 | Kory J.    | 4pm     |
 | Madison S. | 4:30pm  |
