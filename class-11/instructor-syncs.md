@@ -10,7 +10,7 @@ These will take place from 11am - 12pm and 3pm - 6pm
 | ~~Tammy I.~~ | ~~3pm~~     |
 |  ~~Henok G.~~ | ~~3:30pm~~  |
 | Kory J.    | 4pm     |
-| Madison S. | 4:30pm  |
+| ~~Madison S.~~ | ~~4:30pm~~  |
 | Daniel N.   | 5pm     |
 | Clayton J. | 5:30pm  |
 
