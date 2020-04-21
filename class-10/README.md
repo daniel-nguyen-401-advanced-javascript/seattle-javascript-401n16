@@ -6,7 +6,7 @@
 
 ## Lecture Overview
 
-Restricting access to information online is one of the foundational paradigms of the internet. Whether it's your online bank account, facebook profile, or a one-time viewing of a document to sign, getting "logged in" to a website is an everday activity for almost every internet user.
+Restricting access to information online is one of the foundational paradigms of the internet. Whether it's your online bank account, facebook profile, or a one-time viewing of a document to sign, getting "logged in" to a website is an everyday activity for almost every internet user.
 
 Today, we'll be looking at ways to create an account and securely authenticate a user with their chosen username and password.
 
@@ -43,13 +43,13 @@ A Server can decode the Basic Authorization header to retrieve the username and 
 
 Save or skim through the following links to help broaden your understanding.
 
-| Links                                                                               |
-| ----------------------------------------------------------------------------------- |
-| [Securing Passwords](http://cs.wellesley.edu/~cs304/lectures/bcrypt/dustwell.html)  |
-| [Basic Auth](https://en.wikipedia.org/wiki/Basic_access_authentication)             |
-| [OWASP Auth Cheatsheet](https://www.owasp.org/index.php/Authentication_Cheat_Sheet) |
-| [Bcrypt Documentation](https://www.npmjs.com/package/bcrypt)                        |
-| [Introduction to JWT](https://jwt.io/introduction/)                                 |
+| Links                                                                                |
+| ------------------------------------------------------------------------------------ |
+| [Securing Passwords](http://cs.wellesley.edu/~cs304/lectures/bcrypt/dustwell.html)   |
+| [Basic Auth](https://en.wikipedia.org/wiki/Basic_access_authentication)              |
+| [OWASP Auth Cheat-sheet](https://www.owasp.org/index.php/Authentication_Cheat_Sheet) |
+| [Bcrypt Documentation](https://www.npmjs.com/package/bcrypt)                         |
+| [Introduction to JWT](https://jwt.io/introduction/)                                  |
 
 ### Vocabulary
 
