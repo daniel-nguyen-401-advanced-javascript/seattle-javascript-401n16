@@ -53,7 +53,7 @@ You must also have 404 and 500 error handling built in, as well as logging using
    - Fill this database with some products and categories, similar to your `db.json` file from Lab 07
    - Create a duplicate "production" database, either through Mongo Atlas or Heroku mLab and fill it with the same starting data - do not modify this production database while developing
 
-3. Add a `README.md` fo your lab, using the [`README-TEMPLATE.md` file](../../reference/submission-instructions/labs/README-template.md) as a starting point
+3. Add a `README.md` for your lab, using the [`README-TEMPLATE.md` file](../../reference/submission-instructions/labs/README-template.md) as a starting point
 
 4. Ensure your directory has the following files at the top level (not in any sub-folders):
 

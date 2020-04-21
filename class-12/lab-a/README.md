@@ -1,46 +1,73 @@
 # Lab 12 --- OAuth
 
-In this lab, you'll be **working in groups of 2-4 students** to implement OAuth for some chosen third party provider *OTHER THAN* GitHub. Your group must use the provided [starter code]() to integrate your OAuth provider, and you must then assess and report on that provider's ease-of-use. 
+In this lab, you'll be **working in groups of 2-4 students** to implement OAuth for some chosen third party provider *OTHER THAN* GitHub. Your group must use the provided [starter code](https://github.com/codefellows/seattle-javascript-401n16/tree/master/class-12/lab-a/starter-code) to integrate your OAuth provider, and you must then assess and report on that provider's ease-of-use. 
 
+## Application Overview
 
+This application will be simplistic in nature, allowing users to be created in a temporary (non-persistant) database once they've authorized and logged in via a third party OAuth provider. Possible providers to choose from are: 
 
-Our company has decided to integrate OAuth instead of managing user names and passwords internally. In order to make the best decision, we are creating small research teams to assess the suitability of various OAuth providers.
+* [Auth0](https://auth0.com/)
+* [Wordpress](https://developer.wordpress.com/docs/oauth2/)
+* [LinkedIn](https://developer.linkedin.com/docs/signin-with-linkedin)
+* [Google](https://developers.google.com/identity/protocols/oauth2)
 
-Your group will be assigned an OAuth provider to integrate with, assess, and report on.
+> Want to implement OAuth for a provider not listed above? Feel free to! Most large-scale websites with a sign-in process have OAuth implemented, but not all may expose OAuth endpoints to any application  (especially one running on localhost). 
 
-## Before you begin
+## Getting Started
 
-Refer to *Getting Started*  in the [lab submission instructions](../../../reference/submission-instructions/labs/README.md) for complete setup, configuration, deployment, and submission instructions.
+1. Create a new GitHub repository for your lab - note that only one person in the group has to do so. The other members should be able to make commits to the repository. 
 
-## Assignment: Group Research Project
+2. Copy over the [starter code](https://github.com/codefellows/seattle-javascript-401n16/tree/master/class-12/lab-a/starter-code) into your created repository 
 
-- Sites such as Yahoo, Github, WordPress, and LinkedIn all have OAuth mechanisms that work similarly to what was done during demo.
-- Integrate your provider into the provided auth server, using the included integration as your guide, reporting back to the team with a general feasibility report.
-- This is a group lab that will have you integrating OAuth with any provider.
-- Spend no more than 4 hours on this assignment.
-  - Reserve 3 Hours for research and coding and 1 Hour for report and presentation prep
+3. Add a `README.md` for your lab, using the [`README-TEMPLATE.md` file](../../reference/submission-instructions/labs/README-template.md) as a starting point
 
-### Getting Started
+4. Ensure your directory has the following files at the top level (not in any sub-folders):
 
-- Create a new repository for this assignment
-- Copy the contents of the `starter-code/auth-server` folder into your new repository
-  - You will need to create a .env file to provide the server with variables for your implementation
-- When you deploy, be sure and enter those values into Heroku
+   - `.gitignore` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.gitignore))
 
-### Requirements
+   - `.eslintrc.json` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.eslintrc.json))
 
-#### Server
+   - `.eslintignore` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.eslintignore))
 
-- create an account/app/credential on your assigned OAuth Provider
-- configure OAuth credentials to support a client app on `http://localhost`
-- configure OAuth credentials to support a server Redirect URI to `http://localhost:3000/oauth`
-- create a backend route `GET /oauth` for handling OAuth redirects
-- create a new middleware module under `/src` for your provider
+   - `package.json` with the following scripts:
 
-#### Front End
+     ```json
+     "start": "node index.js",
+     "dev": "nodemon index.js",
+     "lint": "eslint **/*.js",
+     "test": "jest --verbose --coverage",
+     "test-watch": "jest --watchAll --verbose --coverage"
+     ```
 
-- The server is configured to use the `public` folder for static files
-- Alter the provided index.html to use the correct settings/link for your assigned provider
+5. Create a `.env` file which contains the following variables. Define these variables based on the OAuth provider you've chosen. Remember that when you deploy your application to Heroku, you must add these config variables (except for PORT) to your Heroku deployment. 
+
+   ```
+   PORT=
+   TOKEN_SERVER=
+   REMOTE_API=
+   CLIENT_ID=
+   CLIENT_SECRET=
+   API_SERVER=
+   ```
+
+6. Create an account / app / credential on your chosen OAuth provider. Each provider has a different path to do this, but typically looking for "setting up a developer application" should point you in the right direction.
+
+   * Make sure your registered application has `http://localhost` as a registered domain AS WELL AS your deployed Heroku URL
+   * Configure your OAuth credentials to support a server redirect to `/oauth` on both your local and Heroku URLs
+
+7. Alter the link in `/public/index.html` (line 14) to match your chosen OAuth provider's authorization code link
+
+## Implementation
+
+Your major implementation task will be find the correct enviornment variable values for your chosen OAuth provider, and to modify `/lib/oauth.js` as needed to support your OAuth provider.
+
+You will also see many comments throughout the starter code with `TODO:` at the beginning. Please add your responses to the posed `TODO:` questions or tasks underneath, and change the `TODO:` to `DONE:`. 
+
+> There are many `TODO` comments throughout all the starter code files! Be sure to use a find or find all operation to catch them! 
+
+### Report 
+
+You will also be tasked to write a report (one report per group) about your experiences implementing your chosen OAuth provider. Use the [sample Report.md file]() as your starting point, and replace any content within (and including) the angle brackets (`<`, `>`) with your groups' thoughts. Add this file to your lab repository, and instead of submitting your `README.md`, submit a link to this file in Canvas. 
 
 #### Testing
 

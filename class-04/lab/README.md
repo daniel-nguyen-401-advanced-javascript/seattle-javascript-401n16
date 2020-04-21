@@ -70,7 +70,7 @@ notes -d <id>
 
 2. Copy over your existing Lab 03 code, which will serve as your "starter code"
 
-3. Add a `README.md` fo your lab, using the [`README-TEMPLATE.md` file](../../reference/submission-instructions/labs/README-template.md) as a starting point
+3. Add a `README.md` for your lab, using the [`README-TEMPLATE.md` file](../../reference/submission-instructions/labs/README-template.md) as a starting point
 
 4. Ensure your directory has the following files at the top level (not in any sub-folders): 
 

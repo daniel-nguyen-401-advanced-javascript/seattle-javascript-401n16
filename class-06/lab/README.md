@@ -42,7 +42,7 @@ DELETE /products/:id/
 
 1. Create a new GitHub repository for your lab
 
-2. Add a `README.md` fo your lab, using the [`README-TEMPLATE.md` file](../../reference/submission-instructions/labs/README-template.md) as a starting point
+2. Add a `README.md` for your lab, using the [`README-TEMPLATE.md` file](../../reference/submission-instructions/labs/README-template.md) as a starting point
 
 3. Ensure your directory has the following files at the top level (not in any sub-folders):
 

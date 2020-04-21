@@ -34,7 +34,7 @@ This route should return a JSON object containing all the existing users in your
    - This database can be empty to start with
    - Create a duplicate "production" database, either through Mongo Atlas or Heroku mLab. Again, this database can be empty to start with
 
-3. Add a `README.md` fo your lab, using the [`README-TEMPLATE.md` file](../../reference/submission-instructions/labs/README-template.md) as a starting point
+3. Add a `README.md` for your lab, using the [`README-TEMPLATE.md` file](../../reference/submission-instructions/labs/README-template.md) as a starting point
 
 4. Ensure your directory has the following files at the top level (not in any sub-folders):
 
