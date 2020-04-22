@@ -10,8 +10,8 @@ These will take place from 11am - 12pm and 3pm - 6pm
 | ~~Tammy I.~~ | ~~3pm~~     |
 |  ~~Henok G.~~ | ~~3:30pm~~  |
 | ~~Madison S.~~ | ~~4:30pm~~  |
-| Daniel N.   | 5pm     |
-| Clayton J. | 5:30pm  |
+| ~~Daniel N.~~   | ~~5pm~~     |
+| ~~Clayton J.~~ | ~~5:30pm~~  |
 
 ## Tuesday
 
@@ -19,7 +19,7 @@ These will take place from 8pm - 9:30pm
 
 | Student  | Time   |
 | -------- | ------ |
-| Brett P. | 8pm    |
+| Sue D. | 8pm    |
 | Thomas T. | 8:30pm |
 | Diana K. | 9pm    |
 
@@ -29,7 +29,7 @@ These will take place from 8pm - 9:30pm
 
 | Student   | Time   |
 | --------- | ------ |
-| Sue D.    | 8pm    |
+| Brett P.    | 8pm    |
 | Randee O. | 8:30pm |
 | Sian C.   | 9pm    |
 
