@@ -9,7 +9,6 @@ These will take place from 11am - 12pm and 3pm - 6pm
 | ~~Eyob T.~~    | ~~11:30am~~ |
 | ~~Tammy I.~~ | ~~3pm~~     |
 |  ~~Henok G.~~ | ~~3:30pm~~  |
-| Kory J.    | 4pm     |
 | ~~Madison S.~~ | ~~4:30pm~~  |
 | Daniel N.   | 5pm     |
 | Clayton J. | 5:30pm  |
@@ -43,3 +42,4 @@ These will take place from 6:30pm - 9:30pm
 | Blandine D. | 6:30pm |
 | Shubham M.  | 7pm    |
 | Joel W.    | 7:30pm    |
+| Kory J.    | 8pm     |
