@@ -34,6 +34,14 @@ app.use(authRouter);
 
 // Error Handling
 
+const errorHandler = (error, req, res, next) => {
+    console.log('in handler');
+    res.status(error.err);
+    res.send(error.msg);
+};
+
+app.use(errorHandler);
+
 // Exports
 module.exports = {
     server: app,

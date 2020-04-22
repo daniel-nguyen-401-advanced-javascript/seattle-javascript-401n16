@@ -4,7 +4,7 @@ const generateSwagger = (app) => {
     let options = {
         swaggerDefinition: {
             info: {
-                description: 'My Lab 10 APIs',
+                description: 'My Lab 10 API',
                 title: 'Lab 10',
                 version: '1.0.0',
             },
