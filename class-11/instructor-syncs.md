@@ -19,9 +19,9 @@ These will take place from 8pm - 9:30pm
 
 | Student  | Time   |
 | -------- | ------ |
-| Sue D. | 8pm    |
-| Thomas T. | 8:30pm |
-| Diana K. | 9pm    |
+| ~~Sue D.~~ | ~~8pm~~    |
+| ~~Thomas T.~~ | ~~8:30pm~~ |
+| ~~Diana K.~~ | ~~9pm~~    |
 
 ## Wednesday
 
