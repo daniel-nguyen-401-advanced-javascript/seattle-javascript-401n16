@@ -29,7 +29,7 @@ These will take place from 8pm - 9:30pm
 
 | Student   | Time   |
 | --------- | ------ |
-| Brett P.    | 8pm    |
+| ~~Brett P.~~    | ~~8pm~~    |
 | Randee O. | 8:30pm |
 | Sian C.   | 9pm    |
 
