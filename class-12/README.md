@@ -38,7 +38,7 @@ Here's an overview of what steps the application goes through:
 1. **Server** - The server receives the access token in a response, and saves it as a reference to the current logged in user.
 1. **Server** - The server uses the saved access token to request from Google any user information such as user name, email, profile picture, etc. From this received user data, the server can now store its own user record in its own database, with no unique password being set.
 
-![image-20200420100720392](/Users/soniakandah/cf/n16/class-12/assets/oauth-process.png)
+![OAuth Process](./assets/oauth-process.png)
 
 In this process, there are two key items that Google provides to the server (other than the actual user data). These items are the authorization code, and the limited access token. Let's look at what each contains.
 
