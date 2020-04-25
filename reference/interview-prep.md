@@ -32,7 +32,7 @@ Please choose a slot you would like to sign up for. In order to sign up, send a 
 | June 27              | 3:30pm               |                      |
 | June 27              | 4:30pm               |                      |
 | -------------------- | -------------------- | -------------------- |
-| July 11              | 3:30pm               |                      |
+| July 11              | 3:30pm               | Shubham M.           |
 | July 11              | 4:30pm               |                      |
 | -------------------- | -------------------- | -------------------- |
 | July 18              | 3:30pm               |                      |
