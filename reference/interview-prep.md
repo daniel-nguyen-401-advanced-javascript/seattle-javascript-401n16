@@ -11,7 +11,7 @@ Please choose a slot you would like to sign up for. In order to sign up, send a 
 | April 25             | 3:30pm               |                      |
 | April 25             | 4:30pm               |                      |
 | -------------------- | -------------------- | -------------------- |
-| May 02               | 3:30pm               |                      |
+| May 02               | 3:30pm               | Joel W.              |
 | May 02               | 4:30pm               |                      |
 | -------------------- | -------------------- | -------------------- |
 | May 09               | 3:30pm               |                      |

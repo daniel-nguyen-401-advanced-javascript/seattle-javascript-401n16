@@ -11,13 +11,15 @@
 
         <script>
             // TODO: What is this URL used for?
-            let URL = 'https://github.com/login/oauth/authorize';
+            let URL = 'https://accounts.google.com/o/oauth2/v2/auth';
 
             // TODO: What do each of these key-value pairs mean?
             let options = {
-                client_id: 'd51a5e46c5e605689148',
+                client_id:
+                    '128009605781-s3kkn6vv1lnvhcv77mk6jom6nac4vob2.apps.googleusercontent.com',
                 redirect_uri: 'http://localhost:3000/oauth',
-                scope: 'read:user',
+                response_type: 'code',
+                scope: 'https://www.googleapis.com/auth/userinfo.profile',
                 state: 'asldfjdfs',
             };
 

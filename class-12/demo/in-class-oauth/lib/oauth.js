@@ -38,7 +38,7 @@ async function getRemoteUserInfo(token) {
     let response = await superagent
         .get(remoteAPI)
         .set('user-agent', 'express-app')
-        .set('Authorization', `token ${token}`);
+        .set('Authorization', `Bearer ${token}`);
 
     let user = response.body;
 
@@ -49,7 +49,7 @@ async function getRemoteUserInfo(token) {
 async function getUser(remoteUser) {
     // TODO: Why is the password set to plaintext 'oauthpassword' here?
     let userRecord = {
-        username: remoteUser.login,
+        username: remoteUser.family_name,
         password: 'oauthpassword',
     };
 
@@ -71,7 +71,7 @@ module.exports = async function authorize(req, res, next) {
         console.log('(2) ACCESS TOKEN:', remoteToken);
 
         let remoteUser = await getRemoteUserInfo(remoteToken);
-        console.log('(3) GITHUB USER', remoteUser);
+        console.log('(3) GOOGLE USER', remoteUser);
 
         let [user, token] = await getUser(remoteUser);
         req.user = user;
