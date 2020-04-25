@@ -17,7 +17,7 @@ Please choose a slot you would like to sign up for. In order to sign up, send a 
 | May 09               | 3:30pm               |                      |
 | May 09               | 4:30pm               |                      |
 | -------------------- | -------------------- | -------------------- |
-| May 16               | 3:30pm               |                      |
+| May 16               | 3:30pm               | Madison S.           |
 | May 16               | 4:30pm               |                      |
 | -------------------- | -------------------- | -------------------- |
 | June 06              | 3:30pm               |                      |
