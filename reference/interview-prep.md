@@ -1,0 +1,46 @@
+# Interview Preparation
+
+Throughout this course, we'll have 12 Saturdays with opportunites interview preparation practice. During this time, I will be asking an interview question, timing you, and then filling out a rubric and providing feedback based on your performance. This is a purely opt-in activity for 10 points of lab extra credit; sign up for a slot if you feel you would like the practice. It is also optional to view the interview, as it will be conducted during lab hours. These practice interviews will be recorded and uploaded along with class lecture videos.
+
+## Slots
+
+Please choose a slot you would like to sign up for. In order to sign up, send a slack message to me with the date and time you'd like. Note that I will refrain from signing someone for multiple slots until everyone has gotten a chance to pick at least one. 
+
+| Date                 | Time                 | Student              |
+| -------------------- | -------------------- | -------------------- |
+| April 25             | 3:30pm               |                      |
+| April 25             | 4:30pm               |                      |
+| -------------------- | -------------------- | -------------------- |
+| May 02               | 3:30pm               |                      |
+| May 02               | 4:30pm               |                      |
+| -------------------- | -------------------- | -------------------- |
+| May 09               | 3:30pm               |                      |
+| May 09               | 4:30pm               |                      |
+| -------------------- | -------------------- | -------------------- |
+| May 16               | 3:30pm               |                      |
+| May 16               | 4:30pm               |                      |
+| -------------------- | -------------------- | -------------------- |
+| June 06              | 3:30pm               |                      |
+| June 06              | 4:30pm               |                      |
+| -------------------- | -------------------- | -------------------- |
+| June 13              | 3:30pm               |                      |
+| June 13              | 4:30pm               |                      |
+| -------------------- | -------------------- | -------------------- |
+| June 20              | 3:30pm               |                      |
+| June 20              | 4:30pm               |                      |
+| -------------------- | -------------------- | -------------------- |
+| June 27              | 3:30pm               |                      |
+| June 27              | 4:30pm               |                      |
+| -------------------- | -------------------- | -------------------- |
+| July 11              | 3:30pm               |                      |
+| July 11              | 4:30pm               |                      |
+| -------------------- | -------------------- | -------------------- |
+| July 18              | 3:30pm               |                      |
+| July 18              | 4:30pm               |                      |
+| -------------------- | -------------------- | -------------------- |
+| July 25              | 3:30pm               |                      |
+| July 25              | 4:30pm               |                      |
+| -------------------- | -------------------- | -------------------- |
+| August 01            | 3:30pm               |                      |
+| August 01            | 4:30pm               |                      |
+

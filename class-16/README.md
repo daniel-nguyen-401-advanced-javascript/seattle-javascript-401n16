@@ -1,8 +1,6 @@
-# TCP Server
+# Event Driven Applications
 
-The Transmission Control Protocol (TCP) is widely used by application layer protocols in the Internet Protocol Suite. TCP creates a two way communication between two hosts and provides reliable, ordered, and error checked byte streams between the applications.
-
-In this class, we will be building a multiple-server event driven system, using TCP as our communication layer.
+Today, we will leverage the ability of Javascript to raise events, monitor events, and perform operations in response to events occurring.
 
 ## Learning Objectives
 
@@ -10,17 +8,14 @@ In this class, we will be building a multiple-server event driven system, using 
 
 #### Describe and Define
 
-- The OSI Networking Model
-- TCP and UDP Protocol
-- Stateful Networking
-- Packets
-- Buffered Transfer
+- Events
+- ... specifically, the Node event system
+- Event driven architecture
 
 #### Execute
 
-- Create a TCP Server
-- Network computers by implementing a TCP server
-- Simulate events through curated messages
+- Implement the Observer pattern using Publish/Subscribe
+- Create a modular, event based system.A
 
 ## Today's Outline
 
