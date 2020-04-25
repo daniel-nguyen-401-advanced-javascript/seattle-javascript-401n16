@@ -35,6 +35,10 @@ class Model {
 
         return false;
     }
+
+    verifyToken(token) {
+        return this.schema.verifyToken(token);
+    }
 }
 
 module.exports = Model;

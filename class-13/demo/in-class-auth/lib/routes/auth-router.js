@@ -2,7 +2,6 @@
 
 // Esoteric Resources
 const express = require('express');
-const jwt = require('jsonwebtoken');
 
 // Internal Resources
 const Model = require('../models/model.js');
@@ -18,7 +17,8 @@ const router = express.Router();
 router.post('/signup', auth, async (req, res, next) => {
     if (req.user.username && !req.user._id) {
         let user = await UsersModel.create({ ...req.user, ...req.body });
-        let token = jwt.sign({ _id: user._id }, process.env.SECRET);
+        let token = user.generateToken();
+        //let token = jwt.sign({ _id: user._id }, process.env.SECRET);
         res.status(201);
         res.send({ user, token });
         return;
@@ -30,7 +30,8 @@ router.post('/signup', auth, async (req, res, next) => {
 router.post('/signin', auth, async (req, res, next) => {
     if (req.user._id) {
         res.status(200);
-        let token = jwt.sign({ _id: req.user._id }, process.env.SECRET);
+        let token = req.user.generateToken();
+        //let token = jwt.sign({ _id: req.user._id }, process.env.SECRET);
         res.send({ user: req.user, token: token });
         return;
     } else {

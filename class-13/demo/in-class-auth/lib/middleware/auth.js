@@ -1,5 +1,3 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const Model = require('../models/model.js');
 const userSchema = require('../models/user-schema.js');
 const UsersModel = new Model(userSchema);
@@ -25,10 +23,7 @@ const getUserFromCredentials = async (userData) => {
     });
 
     for (let i = 0; i < possibleUsers.length; i++) {
-        let isSame = await bcrypt.compare(
-            userData.password,
-            possibleUsers[i].password,
-        );
+        let isSame = possibleUsers[i].comparePasswords(userData.password);
 
         if (isSame) {
             return possibleUsers[i];
@@ -57,9 +52,11 @@ const auth = async (req, res, next) => {
             // authPieces[1] = token
             // verify that the token is legit
             // get a user from that token
-            let tokenData = jwt.verify(authPieces[1], process.env.SECRET);
-            req.user = await UsersModel.read(tokenData._id);
 
+            let tokenData = UsersModel.verifyToken(authPieces[1]);
+            req.user = await UsersModel.read(tokenData._id);
+            // To generate a new token after every request:
+            //req.token = user.generateToken();
             next();
             return;
         }
