@@ -40,8 +40,7 @@ router.post('/signin', auth, async (req, res, next) => {
 });
 
 router.get('/hidden', auth, async (req, res, next) => {
-    console.log(req.user);
-    if (req.user._id) {
+    if (req.user && req.user._id) {
         res.status(200);
         res.send('Secret information that only logged in users can see');
     } else {

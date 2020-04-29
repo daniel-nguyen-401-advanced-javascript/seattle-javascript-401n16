@@ -1,6 +1,6 @@
 class Model {
     constructor(schema) {
-        this.schema = schema;
+        this.schema = schema; // a call to model(doc, fields, [skipId])
     }
 
     async create(data) {
@@ -9,8 +9,7 @@ class Model {
     }
 
     async read(_id) {
-        let record = await this.schema.findOne({ _id });
-        return record;
+        return this.schema.read(_id);
     }
 
     async readByQuery(query) {
