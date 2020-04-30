@@ -1,63 +1,66 @@
-# Module 3 Final Project: API Server
+# Implementation: Trees
 
-Implement a fully functional, authenticated and authorized API Server using the latest coding techniques
+## Specifications
+- Read all of these instructions carefully. Name things exactly as described. 
+- Do all your work in a public repository (matching the example provided by your instructor) called `data-structures-and-algorithms`, with a well-formatted, detailed top-level README.md
+- Create a branch in your repository called `tree`
+- On your branch, create...
+    - _C#_: Create a class named `Tree.cs` 
+    - _JavaScript_: a folder named `tree` which contains a file called `tree.js`
+    - _Python_:a folder named `tree` which contains a file called `tree.py`
+    - _Java_: a package named `tree` which contains files called `Tree.java`, `BinarySearchTree.java`, and `Node.java`
+- Include any language-specific configuration files required for this challenge to become an individual component, module, library, etc.
+    - _NOTE: You can find an example of this configuration for your course in your class lecture repository._
 
-Over the course of the previous 2 modules, you have separately created an `auth-server` and an `api-server` ... In this lab, you will be integrating those 2 servers to create a single, authenticated API server.
+## Features
+- Create a Node class that has properties for the value stored in the node, the left child node, and the right child node. 
+- Create a BinaryTree class
+    - Define a method for each of the depth first traversals called `preOrder`, `inOrder`, and `postOrder`
+	which returns an array of the values, ordered appropriately.  
+- Any exceptions or errors that come from your code should be semantic, capturable errors. For example, rather than a default error thrown by your language, your code should raise/throw a custom, semantic error that describes what went wrong in calling the methods you wrote for this lab.
 
-**NOTE** - You will be using this server as a base for all future work in this course. Other servers will be merged with it, and we'll be using it to serve data to our front-end applications later in the course. Completion of this final lab is essential to your future work being integrated.
+- Create a BinarySearchTree class
+	- Define a method named `add` that accepts a value, and adds a new node with that value in the correct location in the binary search tree.
+	- Define a method named `contains` that accepts a value, and returns a boolean indicating whether or not the value is in the tree at least once. 
 
-## Before you begin
+## Structure and Testing
+Utilize the Single-responsibility principle: any methods you write should be clean, reusable, abstract component parts to the whole challenge. You will be given feedback and marked down if you attempt to define a large, complex algorithm in one function definition.
 
-Refer to *Getting Started*  in the [lab submission instructions](../../../reference/submission-instructions/labs/README.md) for complete setup, configuration, deployment, and submission instructions.
+Write tests to prove the following functionality:
+1. Can successfully instantiate an empty tree
+2. Can successfully instantiate a tree with a single root node
+3. Can successfully add a left child and right child to a single root node
+4. Can successfully return a collection from a preorder traversal
+5. Can successfully return a collection from an inorder traversal
+6. Can successfully return a collection from a postorder traversal
 
-## Getting Started
+Ensure your tests are passing before you submit your solution.
 
-> Create a new GitHub repository for this assignment, called `authenticated-api-server`
+## Stretch Goal
 
-## Requirements
+Create a new branch called `k-ary-tree`, and, using the resources available to you online, implement a k-ary tree, where each node can have any number of children.
 
-- API Routes must now be protected with the proper permissions based on user capability, using Bearer Authentication and an ACL
-  - `app.get(...)` should require authentication only, no specific roles
-  - `app.post(...)` should require the `create` capability
-  - `app.put(...)` should require the `update` capability
-  - `app.patch(...)` should require the `update` capability
-  - `app.delete(...)` should require the `delete` capability
-- Clean and modularize Auth Middleware
-- Clean/Tighten the Auth Model
-- Stretch Goal
-  - Turn authorization/authentication on or off using a variable in your `.env` file
-  - This can allow us to run an API server that does or does not require authenticated users
+## Documentation: Your README.md
 
-> **Implementation Notes/Advice**
+```markdown
+# Trees
+<!-- Short summary or background information -->
 
-- Create a new repository for this project, called `authenticated-api-server`
-- Import your previously built API server code and get it working
-- Add the `auth` module/folder from the `auth-server` to this working API server
-- Import and use the auth routes in the API server module
-- Using the auth routes, create some users with appropriate roles to test with.
-- Apply the appropriate auth middleware to each of your API (v1) routes to "protect" them with auth
+## Challenge
+<!-- Description of the challenge -->
 
-### Testing
+## Approach & Efficiency
+<!-- What approach did you take? Why? What is the Big O space/time for this approach? -->
 
-- Tests from both previous servers should work in the new merged server...
-- 100% Test Coverage Goal For:
-  - Auth router
-    - Signup
-    - Sign In via username/password or Token
-  - Model Finder Middleware
-  - Auth Middleware
-    - Protected Routes
-  - OAuth Chooser
-  - API Routes
-    - Make assertions on the data shapes returned from the API routes
+## API
+<!-- Description of each method publicly available in each of your trees -->
+```
 
-#### Web Server Visual Tests
-
-- Open this [React Application](https://w638oyk7o8.csb.app/)
-- In the form at the top of the page, enter the URL to your API Server
-- This server is configured to use the routes noted in the first lab requirement
-- If your lab is working, this app will show your API Data!
-
-## Assignment Submission Instructions
-
-Refer to the the [Submitting Express Server Lab Submission Instructions](../../../reference/submission-instructions/labs/express-servers.md) for the complete lab submission process and expectations
+## Submission Instructions
+1. Create a pull request from your branch to your `master` branch
+1. In your open pull request, leave as a comment [a checklist](https://github.com/blog/1825-task-lists-in-all-markdown-documents){:target="_blank"} of the specifications and tasks above, with the actual steps that you completed checked off
+1. Submitting your completed work to Canvas:
+    1. Copy the link to your open pull request and paste it into the corresponding Canvas assignment
+    1. Leave a description of how long this assignment took you in the comments box
+    1. Add any additional comments you like about your process or any difficulties you may have had with the assignment
+1. Merge your branch into `master`, and delete your branch (don't worry, the PR link will still work)
