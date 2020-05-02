@@ -6,15 +6,21 @@
 
 ## Lecture Overview
 
-In the past few classes, we've covered the three major pathways to authentication and authorization: Basic, OAuth and Bearer. Let's take authorization a little further, ensuring that any request a client makes is something that client is _allowed to do_, given the signed in user.
+We've now reached the end of our Auth/Auth module, which covered some of the standard ways to handle authentication and authorization in a web application. Using three major authorization methods (Basic, Bearer and OAuth) you can securely recieve credentials from a user and verify their identity. As we review those topics today, we'll also be covering a new data structure, trees. 
 
 At the end of this class, you'll be able to:
 
--   [x] Define roles and capabilities
--   [x] Understand the types of access control
--   [x] Implement role based access control
--   [x] Use a mongoose virtual join to import user role capabilities
--   [x] Understand the security concerns of OAuth
+-   [x] Define what a data structure is
+-   [x] Define what a tree is
+-   [x] Understand the difference between preOrder, postOrder and inOrder traversal
+-   [x] Understand breadth first traversal using a queue
+-   [x] Understand the difference between a binary tree and a binary search tree\
+-   [x] Have a solid understanding of past module topics such as:
+    -   [x] Sign in and sign up using Basic Auth
+    -   [x] Taking user data from a third party using OAuth
+    -   [x] The use of Bearer tokens 
+    -   [x] How to generate a token using JWT 
+    -   [x] Role based access control to protect data / routes
 
 Prior to class, review the readings below and answer the discussion questions in your reading repository.
 

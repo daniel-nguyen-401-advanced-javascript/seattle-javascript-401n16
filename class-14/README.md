@@ -14,7 +14,6 @@ At the end of this class, you'll be able to:
 -   [x] Understand the types of access control
 -   [x] Implement role based access control
 -   [x] Use a mongoose virtual join to import user role capabilities
--   [x] Understand the security concerns of OAuth
 
 Prior to class, review the readings below and answer the discussion questions in your reading repository.
 
