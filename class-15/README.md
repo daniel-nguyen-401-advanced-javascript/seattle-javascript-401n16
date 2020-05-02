@@ -2,7 +2,7 @@
 
 ## Lecture Videos
 
-[Saturday Morning]() || [Saturday Afternoon]()
+[Saturday Morning](https://www.youtube.com/watch?v=ZFa6sBooLl0) || [Saturday Afternoon]()
 
 ## Lecture Overview
 
