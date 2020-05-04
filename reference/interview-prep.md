@@ -11,8 +11,8 @@ Please choose a slot you would like to sign up for. In order to sign up, send a 
 | ~~April 25~~             | ~~3:30pm~~               | ~~n/a~~                |
 | ~~April 25~~             | ~~4:30pm~~               | ~~n/a~~ |
 | -------------------- | -------------------- | -------------------- |
-| May 02               | 3:30pm               | [Joel W.](https://www.youtube.com/watch?v=wDRfw3PjMKs)              |
-| May 02               | 4:30pm               | [Earl Jay C](https://www.youtube.com/watch?v=si9GXoxszOM)                     |
+| ~~May 02~~               | ~~3:30pm~~               | [Joel W.](https://www.youtube.com/watch?v=wDRfw3PjMKs)              |
+| ~~May 02~~               | ~~4:30pm~~               | [Earl Jay C](https://www.youtube.com/watch?v=si9GXoxszOM)                     |
 | -------------------- | -------------------- | -------------------- |
 | May 09               | 3:30pm               |       Joel W.               |
 | May 09               | 4:30pm               |                      |
