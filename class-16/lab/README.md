@@ -1,18 +1,18 @@
 # Lab 16 --- Event Driven Applications
 
-In this lab, we'll be creating an event driven application that "distributes" logging commands to separate modules. Our application will be called *CAPS*, the Code Academy Parcel Service. CAPS will simulate a delivery service where sellers will ship products and be notified when customer receives those products. 
+In this lab, we'll be creating an event driven application that "distributes" logging commands to separate modules. Our application will be called _CAPS_, the Code Academy Parcel Service. CAPS will simulate a delivery service where sellers will ship products and be notified when customer receives those products.
 
 ## Application Overview
 
-Your application must simulate the order and delivery of an item, from seller to customer. The seller (or vendor) should alert the system that a package needs to be delivered, and a delivery driver should alert the system when a package is picked up for delivery. The driver should also alert the system when the package has been delivered. Thus, you should have three major events being communicated: 
+Your application must simulate the order and delivery of an item, from seller to customer. The seller (or vendor) should alert the system that a package needs to be delivered, and a delivery driver should alert the system when a package is picked up for delivery. The driver should also alert the system when the package has been delivered. Thus, you should have three major events being communicated:
 
-- `pickup` - Tells the system when a new order needs to be delivered
-- `in-transit` - Tells the system which order is in the process of being delivered 
-- `delivered` - Tells the system when the order has been delivered
+-   `pickup` - Tells the system when a new order needs to be delivered
+-   `in-transit` - Tells the system which order is in the process of being delivered
+-   `delivered` - Tells the system when the order has been delivered
 
-Your application should automatically generate random orders every 5 seconds. These random orders hould have a store, id, customer, and address as the order data. 
+Your application should automatically generate random orders every 5 seconds. These random orders should have a store, id, customer, and address as the order data.
 
-As an example, here is how your console output might look like for one generated order: 
+As an example, here is how your console output might look like for one generated order:
 
 ```bash
 EVENT pickup
@@ -20,7 +20,7 @@ EVENT pickup
 - Store: My Flower Shop
 - OrderID: 1
 - Customer: Billy Biggs
-- Address: 123 Main Street, New York, NY 
+- Address: 123 Main Street, New York, NY
 
 DRIVER picked up order 1
 
@@ -41,40 +41,40 @@ EVENT delivered order 1
 
 3. Ensure your directory has the following files at the top level (not in any sub-folders):
 
-   - `.gitignore` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.gitignore))
+    - `.gitignore` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.gitignore))
 
-   - `.eslintrc.json` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.eslintrc.json))
+    - `.eslintrc.json` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.eslintrc.json))
 
-   - `.eslintignore` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.eslintignore))
+    - `.eslintignore` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.eslintignore))
 
-   - `package.json` with the following scripts:
+    - `package.json` with the following scripts:
 
-     ```json
-     "start": "node index.js",
-     "lint": "eslint **/*.js",
-     "test": "jest --verbose --coverage",
-     "test-watch": "jest --watchAll --verbose --coverage"
-     ```
+        ```json
+        "start": "node index.js",
+        "lint": "eslint **/*.js",
+        "test": "jest --verbose --coverage",
+        "test-watch": "jest --watchAll --verbose --coverage"
+        ```
 
 4. Set up the file structure for this lab according to the following outline:
 
-   > The following outline below is a suggested implementation. Note that your lab does NOT have to constrain itself to these suggestions; there are many ways to code an application and we encourage creativity and unique approaches! This suggested implementation is primarily for anyone who is having trouble knowing where/how to start.
+    > The following outline below is a suggested implementation. Note that your lab does NOT have to constrain itself to these suggestions; there are many ways to code an application and we encourage creativity and unique approaches! This suggested implementation is primarily for anyone who is having trouble knowing where/how to start.
 
-   ```
-   .gitignore
-   .eslintrc.json
-   .eslintignore
-   index.js
-   package.json
-   
-   /_tests_
-   	events.test.js
-   
-   /lib
-   	driver.js
-   	events.js
-   	vendor.js
-   ```
+    ```
+    .gitignore
+    .eslintrc.json
+    .eslintignore
+    index.js
+    package.json
+
+    /_tests_
+    	events.test.js
+
+    /lib
+    	driver.js
+    	events.js
+    	vendor.js
+    ```
 
 5. Setup GitHub Actions so that your code will be properly tested on each push ([instructions](../../reference/github-actions.md))
 
@@ -84,7 +84,7 @@ EVENT delivered order 1
 
 ### index.js
 
-This will be the entry point for your application. It will import all library modules and log out the event payload whenever a `pickup`, `in-transit` or `delivered` event is triggered. 
+This will be the entry point for your application. It will import all library modules and log out the event payload whenever a `pickup`, `in-transit` or `delivered` event is triggered.
 
 ### lib
 
@@ -92,25 +92,25 @@ This will be the entry point for your application. It will import all library mo
 
 This should be a very simplistic file, just creating a global event emitter that all other files will import and use.
 
-#### vendor.js 
+#### vendor.js
 
-This file should generate a new customer order every 5 seconds. You can utilize the `faker` npm package to generate random order data. When a new customer order is generated, a `pickup` event should emit, and a payload should be sent out with the full order data. 
+This file should generate a new customer order every 5 seconds. You can utilize the `faker` npm package to generate random order data. When a new customer order is generated, a `pickup` event should emit, and a payload should be sent out with the full order data.
 
-The vendor should also listen for the `delivered` event, and when emitted it should log a thank you message to the console, showing the ID of the order that was delivered. 
+The vendor should also listen for the `delivered` event, and when emitted it should log a thank you message to the console, showing the ID of the order that was delivered.
 
 #### driver.js
 
-This file should represent a delivery driver, and its primary function is to listen for the `pickup` event. When that event is emitted, the driver should emit the `in-transit` event and simulate the delivery process with a timer. Use a timer to wait 3 seconds, and then emit the `delivered` event, passing along the order that was delivered in the payload. 
+This file should represent a delivery driver, and its primary function is to listen for the `pickup` event. When that event is emitted, the driver should emit the `in-transit` event and simulate the delivery process with a timer. Use a timer to wait 3 seconds, and then emit the `delivered` event, passing along the order that was delivered in the payload.
 
-The driver should also console log out the actions it is taking as they occur. 
+The driver should also console log out the actions it is taking as they occur.
 
 ### tests
 
-When writing your tests for events, your primary testing action will be that the handler functions for events are properly being called. So, you can import the same event emitter from `events.js` and manually emit the events `pickup`, `in-transit` and `delivery`. Then, you can spy on your `console.log` function, making sure that it was correctly called and that the correct message was logged out. 
+When writing your tests for events, your primary testing action will be that the handler functions for events are properly being called. So, you can import the same event emitter from `events.js` and manually emit the events `pickup`, `in-transit` and `delivery`. Then, you can spy on your `console.log` function, making sure that it was correctly called and that the correct message was logged out.
 
 #### events.test.js
 
-This file should test the handlers for the `pickup`, `delivered` and `in-transit` events. 
+This file should test the handlers for the `pickup`, `delivered` and `in-transit` events.
 
 ## Lab Submission
 
