@@ -87,7 +87,6 @@ class BinaryTree {
             printedArr.push(removedItem.val);
         }
 
-        console.log(printedArr);
         return printedArr;
     }
 }
