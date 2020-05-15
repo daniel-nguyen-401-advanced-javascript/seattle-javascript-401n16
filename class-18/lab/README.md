@@ -166,7 +166,7 @@ Your driver application will act as a socket client to the CSPS server. In your 
 
 ### tests
 
-Testing is not required for this lab. To visually test that you application is running as expected, you can use the following sample application: https://5ctmj.csb.app/
+Testing is not required for this lab. To visually test that you application is running as expected, you can use the following sample application: [https://5ctmj.csb.app/](https://5ctmj.csb.app/)
 
 ## Lab Submission
 
