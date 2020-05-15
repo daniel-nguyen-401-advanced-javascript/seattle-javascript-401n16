@@ -1,23 +1,23 @@
 # Lab 19 --- Message Queues
 
-In this lab, you'll combine Express servers and sockets, to have a communication network over both HTTP and TCP. This lab will only be focusing on order delivery, and not on order creation or transit. For this lab, you may work in a pair if you would like, just be sure to document that on your submitted README file. 
+In this lab, you'll combine Express servers and sockets, to have a communication network over both HTTP and TCP. This lab will only be focusing on order delivery, and not on order creation or transit. For this lab, you may work in a pair if you would like, just be sure to document that on your submitted README file.
 
 ## Application Overview
 
-For this lab, you should have four independent applications running on terminal and communicating with one another. These applications will be: 
+For this lab, you should have four independent applications running on terminal and communicating with one another. These applications will be:
 
-* The message queue server (socket server)
-* The delivery API server (socket client, express server)
-* Vendor 01 (socket client)
-* Vendor 02 (socket client)
+-   The message queue server (socket server)
+-   The delivery API server (socket client, express server)
+-   Vendor 01 (socket client)
+-   Vendor 02 (socket client)
 
-The delivery API server should expose an HTTP POST route of the format `/delivery/:vendor/:order-id`. This route will not have any body parameters, and when triggered using Postman or a similar service, it should tell the appropriate vendor that an order was delivered. If that vendor happens to be disconnected, the message should be saved and sent when the vendor is back online. 
+The delivery API server should expose an HTTP POST route of the format `/delivery/:vendor/:order-id`. This route will not have any body parameters, and when triggered using Postman or a similar service, it should tell the appropriate vendor that an order was delivered. If that vendor happens to be disconnected, the message should be saved and sent when the vendor is back online.
 
 > Note - You do not have to worry about the generation of orders for this lab. Instead, to test your lab, you will just be sending POST requests to your API server with either Vendor 01 or Vendor 02's name, and some random/gibberish `order-id`
 
 As an example, here is how your console outputs might look like for one generated order:
 
-#### Message Queue Server 
+#### Message Queue Server
 
 ```
 Message Queue Server up and running on 3000
@@ -58,38 +58,38 @@ Thank you for delivering order 93827-TJFC
 
 3. Ensure your directory has the following files at the top level (not in any sub-folders):
 
-   - `.gitignore` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.gitignore))
+    - `.gitignore` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.gitignore))
 
-   - `.eslintrc.json` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.eslintrc.json))
+    - `.eslintrc.json` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.eslintrc.json))
 
-   - `.eslintignore` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.eslintignore))
+    - `.eslintignore` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.eslintignore))
 
 4. Set up the file structure for this lab according to the following outline:
 
-   > The following outline below is a suggested implementation. Note that your lab does NOT have to constrain itself to these suggestions; there are many ways to code an application and we encourage creativity and unique approaches! This suggested implementation is primarily for anyone who is having trouble knowing where/how to start.
+    > The following outline below is a suggested implementation. Note that your lab does NOT have to constrain itself to these suggestions; there are many ways to code an application and we encourage creativity and unique approaches! This suggested implementation is primarily for anyone who is having trouble knowing where/how to start.
 
-   ```
-   .gitignore
-   .eslintrc.json
-   .eslintignore
-   
-   api.js
-   queue-server.js
-   vendor-01.js
-   vendor-02.js
-   ```
-   
-Note that in this repo, there are four applications being defined. You can choose to have these applications share a `package.json`, or each belong to their own subfolder with their own `package.json`. If you have a single `package.json`, be sure to create unique scripts to start each application:
-   
+    ```
+    .gitignore
+    .eslintrc.json
+    .eslintignore
+
+    api.js
+    queue-server.js
+    vendor-01.js
+    vendor-02.js
+    ```
+
+Note that in this repo, there are four applications being defined. You can choose to have these applications share a `package.json`, or each belong to their own sub-folder with their own `package.json`. If you have a single `package.json`, be sure to create unique scripts to start each application:
+
 ```json
    "start-queue": "node queue-server.js",
-   "start-api": "node api.js", 
-   "start-vendor-01": "node vendor-01.js", 
+   "start-api": "node api.js",
+   "start-vendor-01": "node vendor-01.js",
    "start-vendor-02": "node vendor-02.js"
    "lint": "eslint **/*.js"
-   ```
-   
-Whichever route you choose, be sure to provide detailed information about how to run your applications in your README file. 
+```
+
+Whichever route you choose, be sure to provide detailed information about how to run your applications in your README file.
 
 ## Implementation
 
@@ -99,59 +99,59 @@ Note that because this implementation is multiple applications, you will need to
 
 1. `queue-server` needs to be up first so that it can accept socket connections
 1. `api-server` needs to be up next to receive POST requests
-1. Vendor applications should be started up next to acknowledge deliveries 
+1. Vendor applications should be started up next to acknowledge deliveries
 1. Postman (or a similar tool) should be used to send a delivery POST request to the `api-server`
 
-> Note that because we're using message queues, even if you swap steps 3 and 4, your vendor applications should be able to "catch-up" with any messages they missed. 
+> Note that because we're using message queues, even if you swap steps 3 and 4, your vendor applications should be able to "catch-up" with any messages they missed.
 
 ### queue-server.js
 
-This application will hold your queue server, running on port `3001`. It should store some object/array containing the different queues in the system. When sockets connect to this socket server, a few actions should take place: 
+This application will hold your queue server, running on port `3001`. It should store some object/array containing the different queues in the system. When sockets connect to this socket server, a few actions should take place:
 
-* The server should log to the console a connected message, with the socket id shown
-* The server should attach event listeners upon the socket for the following events: 
-  * `received` - indicates that a socket received a message from the server, so that it can be deleted from the server
-  * `getAll` - indicates that a socket wants to get all messages in the queue it's looking for
-  * `subscribe` - indicates that a socket wants to subscribe to a queue. The server will put the socket in its own room
-  * `delivered` - indicates that our API server received a delivery POST request and needs to communicate this to the correct vendor. The queue server will emit another `delivered` event to the correct client
+-   The server should log to the console a connected message, with the socket id shown
+-   The server should attach event listeners upon the socket for the following events:
+    -   `received` - indicates that a socket received a message from the server, so that it can be deleted from the server
+    -   `getAll` - indicates that a socket wants to get all messages in the queue it's looking for
+    -   `subscribe` - indicates that a socket wants to subscribe to a queue. The server will put the socket in its own room
+    -   `delivered` - indicates that our API server received a delivery POST request and needs to communicate this to the correct vendor. The queue server will emit another `delivered` event to the correct client
 
-The `delivered` event/message will act as the entry point for the data flow - our API server will emit this event when an HTTP POST request is heard. 
+The `delivered` event/message will act as the entry point for the data flow - our API server will emit this event when an HTTP POST request is heard.
 
 ### api.js
 
-This application will be both an Express API server running on port `3000` *and* a socket client connected to the queue server. It should have one primary route defined, `POST /delivery/:vendor/:order-id`. In this route, `:vendor` is the name of the vendor client this delivery pertains to, and `:order-id` is some random collection of letters and digits that represents that order id.  
+This application will be both an Express API server running on port `3000` _and_ a socket client connected to the queue server. It should have one primary route defined, `POST /delivery/:vendor/:order-id`. In this route, `:vendor` is the name of the vendor client this delivery pertains to, and `:order-id` is some random collection of letters and digits that represents that order id.
 
 When this POST route is hit with a request, the API server should emit a `delivered` event (which will be handled within the queue server). This even should have a payload with the data that matches the following format:
 
 ```javascript
 {
-  vendor: 'flower-shop', 
+  vendor: 'flower-shop',
   orderId: '12345-ABCD'
 }
 ```
 
-It should then return a response of status 200, representing that the delivery was noted in the system. 
+It should then return a response of status 200, representing that the delivery was noted in the system.
 
 ### vendor-01.js and vender-02.js
 
-You will have two applications representing two different vendors. Note that most of the code between these two will be the same. Think about ways to modularize things so you are being efficient! Each vendor application should have a vendor name attached to it, for example `flower-shop` and `candy-shop`. When these vendor applications start up, they should: 
+You will have two applications representing two different vendors. Note that most of the code between these two will be the same. Think about ways to modularize things so you are being efficient! Each vendor application should have a vendor name attached to it, for example `flower-shop` and `candy-shop`. When these vendor applications start up, they should:
 
-* Emit a `subscribe` event, indicating that they want to subscribe to a certain queue. This queue is typically equivalent to the vendor name. 
-* Register a listener for the `delivered` event,  which will check the incoming delivery data and emit a `received` event if the data was successfully received
-* Emit a `getAll` event, indicating that they want to get any messages on the queue they've subscribed to
+-   Emit a `subscribe` event, indicating that they want to subscribe to a certain queue. This queue is typically equivalent to the vendor name.
+-   Register a listener for the `delivered` event, which will check the incoming delivery data and emit a `received` event if the data was successfully received
+-   Emit a `getAll` event, indicating that they want to get any messages on the queue they've subscribed to
 
 ### tests
 
-Testing is not required for this lab. To visually test that you application is running as expected, follow the below order of operations: 
+Testing is not required for this lab. To visually test that you application is running as expected, follow the below order of operations:
 
-* Start all applications in the following order
-  * Queue Server
-  * API Server
-  * Vendors
-* Use an application like Postman to send multiple `POST` requests to `/delivery/:vendor/:order-id`. Be sure to send requests for both of your vendors. Examples are: 
-  * `POST /delivery/flower-shop/12345-ABCD`
-  * `POST /delivery/candy-shop/45678-FCKE `
-* You should now see that your vendor applications log a thank you message for their own orders. You can now stop one or both of the vendor applications and send more `POST` requests. When you start the applications back up, the vendors should "catch up" to the order deliveries they missed while stopped. 
+-   Start all applications in the following order
+    -   Queue Server
+    -   API Server
+    -   Vendors
+-   Use an application like Postman to send multiple `POST` requests to `/delivery/:vendor/:order-id`. Be sure to send requests for both of your vendors. Examples are:
+    -   `POST /delivery/flower-shop/12345-ABCD`
+    -   `POST /delivery/candy-shop/45678-FCKE`
+-   You should now see that your vendor applications log a thank you message for their own orders. You can now stop one or both of the vendor applications and send more `POST` requests. When you start the applications back up, the vendors should "catch up" to the order deliveries they missed while stopped.
 
 ## Lab Submission
 

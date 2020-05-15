@@ -1,6 +1,6 @@
 # Lab 18 --- Socket.io
 
-In this lab, you'll be refactoring your Lab 17 CSPS application yet again, this time pivoting from using the `net` package to using the `socket.io` packages. You will also be implementing some features unique to Socket.io. 
+In this lab, you'll be refactoring your Lab 17 CSPS application yet again, this time pivoting from using the `net` package to using the `socket.io` packages. You will also be implementing some features unique to Socket.io.
 
 ## Application Overview
 
@@ -10,9 +10,9 @@ Your application must be able to support multiple users on different machines co
 -   `in-transit` - Tells the system which order is in the process of being delivered
 -   `delivered` - Tells the system when the order has been delivered
 
-Your client applications should belong to the namespace `csps`. 
+Your client applications should belong to the namespace `csps`.
 
-Your vendor application should automatically generate random orders every 5 seconds. These random orders should have a store name, id, customer, and address as the order data. Your vendor should also join a "room" on your server, so that the vendor only listens to deliveries of their own orders. This room can be identincal to the store name, so that two stores of the same name share a room. 
+Your vendor application should automatically generate random orders every 5 seconds. These random orders should have a store name, id, customer, and address as the order data. Your vendor should also join a "room" on your server, so that the vendor only listens to deliveries of their own orders. This room can be identical to the store name, so that two stores of the same name share a room.
 
 As an example, here is how your console outputs might look like for one generated order:
 
@@ -81,40 +81,40 @@ delivered order 3
 
 3. Ensure your directory has the following files at the top level (not in any sub-folders):
 
-   - `.gitignore` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.gitignore))
+    - `.gitignore` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.gitignore))
 
-   - `.eslintrc.json` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.eslintrc.json))
+    - `.eslintrc.json` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.eslintrc.json))
 
-   - `.eslintignore` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.eslintignore))
+    - `.eslintignore` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.eslintignore))
 
 4. Set up the file structure for this lab according to the following outline:
 
-   > The following outline below is a suggested implementation. Note that your lab does NOT have to constrain itself to these suggestions; there are many ways to code an application and we encourage creativity and unique approaches! This suggested implementation is primarily for anyone who is having trouble knowing where/how to start.
+    > The following outline below is a suggested implementation. Note that your lab does NOT have to constrain itself to these suggestions; there are many ways to code an application and we encourage creativity and unique approaches! This suggested implementation is primarily for anyone who is having trouble knowing where/how to start.
 
-   ```
-   .gitignore
-   .eslintrc.json
-   .eslintignore
-   
-   /csps
-   	package.json
-   	server.js
-   
-   /driver
-   	package.json
-   	driver.js
-   
-   /vendor
-   	package.json
-   	vendor.js
-   ```
+    ```
+    .gitignore
+    .eslintrc.json
+    .eslintignore
 
-   Note that in this repo, there are three applications being defined, each with their own `package.json`. Ensure each `package.json` has scripts that somewhat match the following (`index.js` will have to be replaced with the right file to launch for each application)
+    /csps
+    	package.json
+    	server.js
 
-   ```json
-   "start": "node index.js",
-   "lint": "eslint **/*.js"
-   ```
+    /driver
+    	package.json
+    	driver.js
+
+    /vendor
+    	package.json
+    	vendor.js
+    ```
+
+    Note that in this repo, there are three applications being defined, each with their own `package.json`. Ensure each `package.json` has scripts that somewhat match the following (`index.js` will have to be replaced with the right file to launch for each application)
+
+    ```json
+    "start": "node index.js",
+    "lint": "eslint **/*.js"
+    ```
 
 ## Implementation
 
@@ -128,17 +128,17 @@ Note that because this implementation is multiple applications, you will need to
 
 ### csps
 
-This application will be your server, allowing client applications to connect to it. Within the application's `server.js` file, you should do the following: 
+This application will be your server, allowing client applications to connect to it. Within the application's `server.js` file, you should do the following:
 
-* Check for connections to the `csps` namespace
-* On connections, it should log out the current socket id
-* It should allow sockets to emit a `join` event that will tell the server to put this socket into a specified room
-* It should log out every event it receives from connected sockets, as shown in the sample console output above
-* It should broadcast `in-transit` and `delivered` events to the vendor sockets in the appropriate room
+-   Check for connections to the `csps` namespace
+-   On connections, it should log out the current socket id
+-   It should allow sockets to emit a `join` event that will tell the server to put this socket into a specified room
+-   It should log out every event it receives from connected sockets, as shown in the sample console output above
+-   It should broadcast `in-transit` and `delivered` events to the vendor sockets in the appropriate room
 
 #### Stretch Goal
 
-An optional stretch goal for this application is to combine the socket functionality with an Express server. Create a quick express server on your csps application that exposes a `/post` route. This route will accept an order in the post body, and then trigger a `pickup` event. 
+An optional stretch goal for this application is to combine the socket functionality with an Express server. Create a quick express server on your csps application that exposes a `/post` route. This route will accept an order in the post body, and then trigger a `pickup` event.
 
 ### vendor
 
