@@ -20,7 +20,7 @@ As an example, here is how your console outputs might look like for one generate
 #### Message Queue Server
 
 ```
-Message Queue Server up and running on 3000
+Message Queue Server up and running on 3001
 Connected 8Um4-hGsBVGxRK1kAAAA
 Connected QFWO_O6ylXOKhwKDAAAB
 Connected 21UFwNA3wfUzDenzAAAC
@@ -29,7 +29,7 @@ Connected 21UFwNA3wfUzDenzAAAC
 #### API Server
 
 ```
-API Server up and running on 3001
+API Server up and running on 3000
 delivery { vendor: 'flower-shop', orderId: '12345-ABCD' }
 delivery { vendor: 'candy-shop', orderId: '39201-GHWU' }
 delivery { vendor: 'candy-shop', orderId: '93827-TJFC' }
