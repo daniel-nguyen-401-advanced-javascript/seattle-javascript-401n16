@@ -30,9 +30,9 @@ Connected 21UFwNA3wfUzDenzAAAC
 
 ```
 API Server up and running on 3001
-delivery { retailer: 'flower-shop', code: '12345-ABCD' }
-delivery { retailer: 'candy-shop', code: '39201-GHWU' }
-delivery { retailer: 'candy-shop', code: '93827-TJFC' }
+delivery { vendor: 'flower-shop', orderId: '12345-ABCD' }
+delivery { vendor: 'candy-shop', orderId: '39201-GHWU' }
+delivery { vendor: 'candy-shop', orderId: '93827-TJFC' }
 ```
 
 #### Vendor Applications
