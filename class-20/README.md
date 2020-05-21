@@ -1,5 +1,11 @@
 # Mid-Term Project
 
+## Lecture Videos (Class 20)
+
+[Tuesday Review](https://www.youtube.com/watch?v=grCwWrg2Q5g) || [Wednesday Review]()
+
+## Overview 
+
 During our course midterm, you and your team will be asked to develop an application, service or system which utilizes concepts learned in the first half of the course. Work together as a team to learn new things, implement things you've done in class, and have the end-to-end experience of creating, documenting, testing, and deploying an application just as you would do in a professional environment.
 
 ## Core Requirements
@@ -134,7 +140,7 @@ Remember, your project should be back-end only; don't create any client-side lay
 
 Below is a collection of ideas to help you get started. These are examples of things previous 401 students have implemented.
 
-- An API that fetches and posts Google contacts to an from an external database
+- An API that fetches and posts Google contacts to and from an external database
 - An API integrated with a Raspberry PI Zero which will listen for a voice request to get a mock interview whiteboard question, pulls a random question from a database, and then reads it out loud through a speaker
 - An API that allows users to rate and give opinions on burgers
 - Blockchain built from JavaScript and MongoDB
