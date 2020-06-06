@@ -1,0 +1,46 @@
+// variables
+
+$purple: rgb(217, 188, 232);
+$red: rgb(255, 167, 159);
+$blue: rgb(155, 250, 255);
+
+$spacing: 40px;
+
+.header {
+    text-align: center;
+    background-color: $purple;
+    padding: $spacing;
+}
+
+.content {
+    text-align: center;
+    float: right;
+    width: 50%;
+    background-color: $red;
+
+    input {
+        margin-top: $spacing;
+        width: 80%;
+        font-size: 18px;
+        padding: $spacing / 2;
+    }
+}
+
+.graphic {
+    text-align: center;
+    background-color: $blue;
+    float: left;
+    width: 50%;
+    margin-bottom: $spacing / 2;
+
+    img {
+        width: 40%;
+        max-height: 200px;
+        height: auto;
+    }
+
+    // & is like the "this" keyword
+    &:last-child {
+        clear: both;
+    }
+}
