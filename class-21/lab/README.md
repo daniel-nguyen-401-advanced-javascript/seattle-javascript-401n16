@@ -83,7 +83,7 @@ In your Counter component, instead of having the current count plainly printed, 
 
 Because this is a front end application, we will also be adding design implementation requirements to your lab. These design requirements should be coded in SASS (.scss or .sass) only, not CSS. Be creative with these requirements to fully flex your front end design skills!
 
-### app.scss (or app.sass)
+### styles.scss (or styles.sass)
 
 In this SASS file, add some styling for the Header, Footer and Counter components. Within your SASS code, you must:
 
