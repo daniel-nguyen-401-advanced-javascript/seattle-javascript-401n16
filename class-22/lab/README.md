@@ -18,7 +18,7 @@ Create a new repository for this assignment, copy the starter-code folder conten
 2. Ensure your repository has the following file at the top level (not in any sub-folders):
 
    - `.gitignore` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.gitignore))
-3. Copy the contents of `/lab/starter-code` into your created repository
+3. Copy the contents of [`/lab/starter-code`](https://github.com/codefellows/seattle-javascript-401n16/tree/master/class-22/lab/starter-code) into your created repository
 4. Your file structure for this lab should roughly match the following outline:
 
 ```
