@@ -1,49 +1,42 @@
-# OAuth Comparative Analysis
+# OAuth Comparative Analysis - < OAuth Provider Name >
 
-## OAuth Provider Name 
+Research Conducted By: < Student Names >
 
-### Research Conducted By: Student Names
+## General Comments
 
-### Overall Score and Comments
-#### Score (Out of 10): 7
-#### General Comments
-Describe the stack (front-end only? full stack?), database, efficiency, etc. Describe the general usability and learnability
+< Describe the general usability and learnability >
+
+## Pros and Cons
 
 #### Pros
-* Item 1
-* Item 2
+
+< Bulleted List > 
 
 #### Cons
-* Item 1
-* Item 2
 
-### Ratings and Reviews
-#### Documentation
-Thoughts go here
+< Bulleted List > 
 
-#### Systems Requirements
-Above and beyond 'node' and 'linux', what dependencies or core requirements exist for this framework?  Can it play at AWS/Heroku?  Does it require a certain database?
+## Documentation
 
-#### Ramp-Up Projections
-How long would/should it take a team of mid-junior developers to become productive?
+< Where can you learn how to implement this OAuth provider? > 
 
-#### Community Support and Adoption levels
-How popular is this framework? What big companies are running on it? How is it "seen" in the general JS community?  Is there an active community of developers supporting and growing it?
+## Ramp-Up Projections
 
+< How long would/should it take a team of mid-junior developers to implement? > 
 
-### Links and Resources
-* [framework](http://xyz.com)
-* [docs](http://xyz.com)
-* [examples/tutorials](http://xyz.com)
+## Community Support and Adoption levels
 
-### Code Demos
-* [live/running application](http://xyz.com)
-* [code repository](http://xyz.com)
+< How popular is this provider? What big companies are running on it? >
 
-### Operating Instructions
-If someone were to download your repo (above), what steps do they need to take to run the application
-* `npm start`
-* Endpoint: `/foo/bar/`
-  * Returns a JSON object with abc in it.
-* Endpoint: `/bing/zing/`
-  * Returns a JSON object with xyz in it.
+## Links and Resources
+
+< Bulleted List > 
+
+## Code Demos
+
+* < Deployed Heroku application link > 
+* < Code repo link >
+
+## Operating Instructions
+
+< If someone were to download your repo (above), what steps do they need to take to run the application >

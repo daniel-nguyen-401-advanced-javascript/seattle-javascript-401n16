@@ -1,0 +1,12 @@
+{
+    "name": "testing",
+    "version": "1.0.0",
+    "description": "Our first demo describing testing with Jest",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "test": "jest --verbose --coverage"
+    },
+    "author": "Sonia Kandah",
+    "license": "ISC"
+}

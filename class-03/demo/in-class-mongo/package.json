@@ -1,0 +1,14 @@
+{
+    "name": "in-class-mongo",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "jest --verbose --coverage"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "mongoose": "^5.9.5"
+    }
+}

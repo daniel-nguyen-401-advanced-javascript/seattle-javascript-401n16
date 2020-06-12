@@ -1,85 +1,148 @@
-# LAB: Event Driven Applications
+# Lab 15 --- DSA: Trees
 
-Create an event driven application that "distributes" the responsibility for logging to separate modules, using only events to trigger logging based on activity.
+This DSA lab is a mix of a code challenge and standard lab. Note that there is no code challenge for this class - use the extra time to catch up on existing labs and to refresh yourself on what was learned from Class 10 - Class 15.
 
-We're going to build an application for a company called **CAPS** - The Code Academy Parcel Service
+## Application Overview
 
-**CAPS** will simulate a delivery service where vendors (such a flower shops) will ship products using our delivery service and when delivered, be notified that their customers received what they purchased.
-
-## Before you begin
-
-Refer to *Getting Started*  in the [lab submission instructions](../../../reference/submission-instructions/labs/README.md) for complete setup, configuration, deployment, and submission instructions.
+This application will be the implementation of a BinaryTree and BinarySearchTree class, and any important methods related to that.
 
 ## Getting Started
 
-## Requirements
+1. Do all your work in a public repository called `data-structures-and-algorithms`, with a well-formatted, detailed top-level `README.md`
 
-The application must:
+   - Your top-level `README.md` should contain a “Table of Contents” navigation to all of your challenges and implementations so far (don’t forget to update it!)
 
-- Simulate the order and delivery of an item from a vendor to a customer
-- The vendor should alert the system of a package to be delivered
-- A driver should alert the system when they've picked up the package
-- A driver should alert the system when they've delivered the package
 
-### Implementation Details and Requirements
+2. Create (or navigate to) a folder within this repository named `data-structures` - you will be working in this folder for this lab
 
-Create the CAPS system as follows:
+3. Create a new branch in your repo called `tree`
 
-- `events.js` - Global Event Pool (shared by all modules)
-- `caps.js` - Main Hub Application
-  - Logs every event to the console with a timestamp and the event payload
-- `vendor.js` - Vendor Module
-  - Every 5 seconds, simulate a new customer order
-    - Emit a 'pickup' event
-    - Payload should be an object with your store name, order id, customer name, address
-      - HINT: Have some fun by using the [faker](https://www.npmjs.com/package/faker) library to make up phony information
-  - Whenever the 'delivered' event occurs
-    - Log "thank you" to the console
-- `driver.js` - Drivers Module
-  - On the 'pickup' event ...
-    - Wait 1 second
-      - Log "picked up" to the console.
-      - Emit an 'in-transit' event with the payload
-    - Wait 3 seconds
-      - Log "delivered" to the console
-      - Emit a 'delivered' event with the payload
+4. On your branch and within the `data-structures` folder, create a sub-folder named `tree` which contains a file called `tree.js` and a local `README.md`
 
-When running, your console output should look something like this:
+5. Ensure your directory has the following files at the top level (not in any sub-folders):
+   * `.gitignore` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.gitignore))
+   * `.eslintrc.json` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.eslintrc.json))
+   * `.eslintignore` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.eslintignore))
+   * `package.json` with the following scripts:
 
-```javascript
-EVENT { event: 'pickup',
-  time: 2020-03-06T18:27:17.732Z,
-  payload:
-   { store: '1-206-flowers',
-     orderID: 'e3669048-7313-427b-b6cc-74010ca1f8f0',
-     customer: 'Jamal Braun',
-     address: 'Schmittfort, LA' } }
-DRIVER: picked up e3669048-7313-427b-b6cc-74010ca1f8f0
-EVENT { event: 'in-transit',
-  time: 2020-03-06T18:27:18.738Z,
-  payload:
-   { store: '1-206-flowers',
-     orderID: 'e3669048-7313-427b-b6cc-74010ca1f8f0',
-     customer: 'Jamal Braun',
-     address: 'Schmittfort, LA' } }
-DRIVER: delivered up e3669048-7313-427b-b6cc-74010ca1f8f0
-VENDOR: Thank you for delivering e3669048-7313-427b-b6cc-74010ca1f8f0
-EVENT { event: 'delivered',
-  time: 2020-03-06T18:27:20.736Z,
-  payload:
-   { store: '1-206-flowers',
-     orderID: 'e3669048-7313-427b-b6cc-74010ca1f8f0',
-     customer: 'Jamal Braun',
-     address: 'Schmittfort, LA' } }
-...
+```json
+"start": "node index.js",
+"lint": "eslint **/*.js",
+"test": "jest --verbose --coverage",
+"test-watch": "jest --watchAll --verbose --coverage"
 ```
 
-### Testing
+6. Setup GitHub Actions so that your code will be properly tested on each push ([instructions](../../reference/github-actions.md))
 
-- Write tests around all of your units
-- Test event handler function (not event triggers themselves)
-- Use spies to help testing your logger methods (assert that console.log was called right)
+## Implementation
 
-## Assignment Submission Instructions
+### tree.js
 
-Refer to the the [lab submission instructions](../../../reference/submission-instructions/labs/README.md) for the complete lab submission process and expectations
+In this file, your task will be to create three classes, `Node`, `BinaryTree` and `BinarySearchTree`. All three should be exported by this file.
+
+#### Node
+
+Your Node class should have the following properties:
+
+-   `val` - The value stored in the `Node`
+-   `left` - A pointer the left child `Node` in the tree
+-   `right` - A pointer to the right child `Node` in the tree
+
+Your Node class does not need to have any functions/methods, though you can add some if you have a use-case for it.
+
+#### BinaryTree
+
+Your BinaryTree class should have the following properties:
+
+* `root` - The `Node` that represents the root of the tree
+
+Your BinaryTree class should have the following functions/methods:
+
+-   `preOrder()` - A function that traverses the tree using preOrder depth-first traversal, and returns an array containing all the values in the traversed order
+
+-   `inOrder()` - A function that traverses the tree using inOrder depth-first traversal, and returns an array containing all the values in the traversed order
+-   `postOrder()` - A function that traverses the tree using postOrder depth-first traversal, and returns an array containing all the values in the traversed order
+
+Note that any errors in your BinaryTree class and methods should be well handled and logged. Don't default to the standard thrown error; instead use `try` `catch` blocks to correctly catch errors and log a user-friendly and descriptive message to the console.
+
+#### Binary Search Tree
+
+This class may extend or inherit from the BinaryTree class. 
+
+Your BinarySearchTree class should have the following properties: 
+
+* `root` - The `Node` that represents the root of the tree
+
+Your BinarySearchTree class should have the following functions/methods: 
+
+* `add(val)` - A function that takes in a value as a parameter, and then adds a new `Node` with that value in the correct locations of the binary search tree
+* `contains(val)` - A function that takes in a value as a parameter, and returns `true` if that value is in the tree, and `false` if not
+
+#### Stretch Goal
+
+An optional stretch goal for this lab assignment is to implement a class called KaryTree. Create a new branch called `k-ary-tree`, and, using the resources available to you online, implement a k-ary tree, where each node can have any number of children.
+
+#### Testing
+
+Write tests to prove the following functionality:
+
+-   You can successfully instantiate an empty tree
+-   You can successfully instantiate a tree and add a single root node 
+-   You can successfully add a left and right child to a single root node
+-   You can successfully do a preOrder traversal 
+-   You can successfully do an inOrder traversal 
+-   You can successfully do a postOrder traversal 
+-   You can successfully add a value to a binary search tree
+-   You can search a binary search tree for a value and get the correct true/false result
+
+Ensure your tests are passing before you submit your solution.
+
+## Lab Submission
+
+- `README.md`
+
+  - In order to submit this lab, you will need to provide a link to your `tree` directory's `README.md`. This `README.md` should be formatted to match the following structure:
+
+    ```markdown
+    # Tree Implementation
+    
+    <!-- Short summary or background information -->
+    
+    ## Links
+    
+    <!-- Link to pull request, passing tests, etc -->
+    
+    ## Challenge
+    
+    <!-- Description of the challenge -->
+    
+    ## Approach & Efficiency
+    
+    <!-- What approach did you take? Why? What is the Big O space/time for this approach? -->
+    
+    ## API
+    
+    <!-- Description of each method publicly available to your Tree classes -->
+    
+    ## Testing
+    
+    <!-- Description of how to run your tests -->
+    ```
+
+  - Alongside creating your `README.md`, create a pull request from your current branch into your master branch. Be sure to add a link to this pull request within your `README.md`!
+
+- Code Documentation / Cleanliness
+
+  -   Ensure that your code is well formatted and passes all lint tests
+  -   Ensure that all functions and classes within your code are documented with JSDoc comments
+      -   [Official Documentation](http://usejsdoc.org/about-getting-started.html)
+      -   [Cheat Sheet](https://devhints.io/jsdoc)
+      -   [Style Guide](https://github.com/shri/JSDoc-Style-Guide)
+      -   Be descriptive about the purpose of the function / class
+      -   Declare data types for parameters and return values
+      -   Note that you do not have to generate a JSDoc hosted website, just the commenting in your code files will suffice
+
+- Canvas Submission
+
+  -   Submit a link to your lab's `README.md`
+  -   Once your lab has been graded for the first time, you may resubmit the link to your lab's `README.md` exactly once for a regrade

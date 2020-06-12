@@ -1,115 +1,191 @@
-# LAB:
+# Lab 18 --- Socket.io
 
-Create an multi-server, event driven application that uses only events transmitted over a network, using socket.io to trigger logging based on activity.
+In this lab, you'll be refactoring your Lab 17 CSPS application yet again, this time pivoting from using the `net` package to using the `socket.io` packages. You will also be implementing some features unique to Socket.io.
 
-We're going to continue working on the application for a company called **CAPS** - The Code Academy Parcel Service
+## Application Overview
 
-**CAPS** will simulate a delivery service where vendors (such a flower shops) will ship products using our delivery service and when delivered, be notified that their customers received what they purchased.
+Your application must be able to support multiple users on different machines communicating with one another. Because of this, we're going to be making three distinct applications, and have them all communicate over the internet. These applications will together simulate the order and delivery of an item, from seller to customer. The seller (or vendor) should alert the system that a package needs to be delivered, and a delivery driver should alert the system when a package is picked up for delivery. The driver should also alert the system when the package has been delivered. Thus, you should have three major events being communicated:
 
-As you can imagine, the CAPS system, the Vendors and the Drivers will all be on different computers and can't be using the same running application, so we'll need a way to keep everything in sync over the network.
+-   `pickup` - Tells the system when a new order needs to be delivered
+-   `in-transit` - Tells the system which order is in the process of being delivered
+-   `delivered` - Tells the system when the order has been delivered
 
-## Before you begin
+Your client applications should belong to the namespace `csps`.
 
-Refer to *Getting Started*  in the [lab submission instructions](../../../reference/submission-instructions/labs/README.md) for complete setup, configuration, deployment, and submission instructions.
+Your vendor application should automatically generate random orders every 5 seconds. These random orders should have a store name, id, customer, and address as the order data. Your vendor should also join a "room" on your server, so that the vendor only listens to deliveries of their own orders. This room can be identical to the store name, so that two stores of the same name share a room.
+
+As an example, here is how your console outputs might look like for one generated order:
+
+#### CSPS Application
+
+```
+connected to socket 001
+socket 001 joined room 'flower-shop'
+
+pickup
+- Time: 05/07/2020 1:30 PM
+- Store: flower-shop
+- OrderID: 1
+- Customer: Billy Biggs
+- Address: 123 Main Street, New York, NY
+
+connected to socket 002
+socket 002 joined room 'candy-shop'
+
+in-transit order 1
+delivered order 1
+
+pickup
+- Time: 05/07/2020 1:32 PM
+- Store: candy-shop
+- OrderID: 2
+- Customer: Sarah Smalls
+- Address: 234 Grand Street, New York, NY
+
+in-transit order 2
+delivered order 2
+```
+
+#### Vendor Application
+
+##### Flower Shop Output
+
+```
+Thank you for delivering order 1
+Thank you for delivering order 3
+```
+
+##### Candy Shop Output
+
+```
+Thank you for delivering order 2
+Thank you for delivering order 4
+```
+
+#### Driver Application
+
+```bash
+picked up order 1
+delivered order 1
+picked up order 2
+delivered order 2
+picked up order 3
+delivered order 3
+```
 
 ## Getting Started
 
-## Requirements
+1. Create a new GitHub repository for your lab, or branch off of an existing lab repository
 
-The application must:
+2. Add a `README.md` for your lab, using the [`README-TEMPLATE.md` file](../../reference/submission-instructions/labs/README-template.md) as a starting point
 
-- Support multiple users on different machines communicating to one another
-- Simulate the order and delivery of an item from a vendor to a customer
-- The vendor should alert the system of a package to be delivered
-- A driver should alert the system when they've picked up the package
-- A driver should alert the system when they've delivered the package
+3. Ensure your directory has the following files at the top level (not in any sub-folders):
 
-### Implementation Details and Requirements
+    - `.gitignore` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.gitignore))
 
-Create 3 separate services that can run independently on any machine
+    - `.eslintrc.json` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.eslintrc.json))
 
-### CAPS Application Server
+    - `.eslintignore` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.eslintignore))
 
-- Starts a socket.io server on a designated port
-- Creates a namespace called `csps`
-- Within the namespace:
-  - Monitor the 'join' event.
-    - Each vender will have their own "room" so that they only get their own delivery notifications
-  - Monitor the correct general events
-    - `pickup`, `in-transit`, `delivered`
-    - Broadcast the events and payload back out to all connected clients in the `csps` namespace
-      - `pickup` can go out to all sockets (broadcast it)
-      - `in-transit` and `delivered` are meant to be heard only by the right vendor
-        - Broadcast those messages and payload only to the room (vendor) for which the message was intended
+4. Set up the file structure for this lab according to the following outline:
 
-### Vendor Application
+    > The following outline below is a suggested implementation. Note that your lab does NOT have to constrain itself to these suggestions; there are many ways to code an application and we encourage creativity and unique approaches! This suggested implementation is primarily for anyone who is having trouble knowing where/how to start.
 
-- Use the store code `1-206-flowers`
-- Connects to the CAPS server as a socket.io client to the `csps` namespace
-- Join a `room` for your store
-  - Emit a `join` event, with the payload being your store code
-- Every .5 seconds, simulate a new customer order
-  - Create a payload object with your store name, order id, customer name, address
-    - HINT: Have some fun by using the [faker](https://www.npmjs.com/package/faker) library to make up phony information
-  - Emit that message to the CAPS server with an event called `pickup`
-- Listen for the `delivered` event coming in from the CAPS server
-  - Log "thank you for delivering `payload.id`" to the console
+    ```
+    .gitignore
+    .eslintrc.json
+    .eslintignore
 
-### Driver Application
+    /csps
+    	package.json
+    	server.js
 
-- Connects to the CAPS server as a socket.io client to the `csps` namespace
-- Listen for the `pickup` event coming in from the CAPS server
-  - **Simulate picking up the package**
-    - Wait 1.5 seconds
-    - Log "picking up `payload.id`" to the console
-    - emit an `in-transit` event to the CAPS server with the payload
-  - **Simulate delivering the package**
-    - Wait 3 seconds
-    - emit a `delivered` event to the CAPS server with the payload
+    /driver
+    	package.json
+    	driver.js
 
-When running, the vendor and driver consoles should show their own logs. Additionally, the CAPS server should be logging everything.  Your console output should look something like this:
+    /vendor
+    	package.json
+    	vendor.js
+    ```
 
-<img src="lab-17-output.png" width="600">
+    Note that in this repo, there are three applications being defined, each with their own `package.json`. Ensure each `package.json` has scripts that somewhat match the following (`index.js` will have to be replaced with the right file to launch for each application)
 
-### Notes
+    ```json
+    "start": "node index.js",
+    "lint": "eslint **/*.js"
+    ```
 
-- You will need to run all 3 servers. Clients will automatically re-connect to the server if it restarts (socket.io magic!)
+## Implementation
 
-1. `csps` - needs to be up so that it can accept and re-emit events
-1. `vendor` - needs to have a running server to connect to, so that it can hear events
-1. `driver` to run and have the server hear your events
+> The following outline below is a suggested implementation. Note that your lab does NOT have to constrain itself to these suggestions; there are many ways to code an application and we encourage creativity and unique approaches! This suggested implementation is primarily for anyone who is having trouble knowing where/how to start.
 
-### Visual Validation
+Note that because this implementation is multiple applications, you will need to run three applications together to fully test this. Be sure to start up your applications in the correct order, or there may be connection issues.
 
-Open this Web Application: <https://5ctmj.csb.app/>
+1. `csps` - needs to be up first so that it can accept socket connections
+1. `driver` - needs to be up second so that it can connect to the socket server and await orders created from the vendor
+1. `vendor` - needs to be up third so that it can connect to the socket server and start creating orders that the driver can respond to
 
-It will connect to the socket.io server URL you specify using the vendor code `1-206-flowers`
+### csps
 
-If your sever, vendor and driver apps are all running according to the instructions, this application will show the full supply chain in real time.
+This application will be your server, allowing client applications to connect to it. Within the application's `server.js` file, you should do the following:
 
-### Stretch Goal
+-   Check for connections to the `csps` namespace
+-   On connections, it should log out the current socket id
+-   It should allow sockets to emit a `join` event that will tell the server to put this socket into a specified room
+-   It should log out every event it receives from connected sockets, as shown in the sample console output above
+-   It should broadcast `in-transit` and `delivered` events to the vendor sockets in the appropriate room
 
-Instead of simply having the Vendor application send messages every 5 seconds (in fact, turn that vendor application OFF!), write a separate app using express, with a single route: POST `/pickup` that accepts an object that looks like the object you are currently creating in the vendor application.
+#### Stretch Goal
 
-```javascript
-{
-  "store": "1-206-flowers",
-  "orderID": "65c17431-d1f5-432c-890f-d81788e38c1c",
-  "customer": "Juston Reichel",
-  "address": "Lake Al, OK"
- }}
-```
+An optional stretch goal for this application is to combine the socket functionality with an Express server. Create a quick express server on your csps application that exposes a `/post` route. This route will accept an order in the post body, and then trigger a `pickup` event.
 
-When that route is hit, have the express server fire the event to the socket server with the `pickup` event with that object payload. This should kick off the same series of events that the `setInterval()` was doing in the vendor application, but using a web browser instead of automation to do each one
+### vendor
 
-Assuming your small api server runs on port 3001, the form in the test app will hit that route if you have done this step
+Your vendor application will act as a socket client to the CSPS server. In your `vendor.js` file, you should have the following processes implemented:
 
-### Testing
+-   Connect to the CSPS server, in the `csps` namespace
+-   Emit a `join` event, with the store name (which will be used as the room name) as the event payload
+-   Every 5 seconds, a new customer order will be randomly generated. This order should have a store name, order id, customer name and address. Use the [faker](https://www.npmjs.com/package/faker) package to help generate random values.
+-   When a new customer order is generated, emit a `pickup` event, with the generated order as the payload
+-   Listen for the `delivered` event from the CSPS server. When you hear that event, look at the payload sent and log a thank you message to the console with the order ID
 
-- Write tests around all of your units
-- Test event handler function (not event triggers themselves)
-- Use spies to help testing your logger methods (assert that console.log was called right)
+### driver
 
-## Assignment Submission Instructions
+Your driver application will act as a socket client to the CSPS server. In your `driver.js` file, you should have the following processes implemented:
 
-Refer to the the [lab submission instructions](../../../reference/submission-instructions/labs/README.md) for the complete lab submission process and expectations
+-   Connect to the CSPS Socket Server, in the `csps` namespace
+-   Listen for the `pickup` event from the CSPS server. When you hear that event, look at the payload sent and simulate picking up the package
+    -   Wait one second
+    -   Log `picked up order #` to the console
+    -   Emit an `in-transit` event with the same order payload passed along
+-   Listen for the `in-transit` event. When heard, look at the payload and simulate the delivery of the package
+    -   Wait three seconds
+    -   Log `delivered order #` to the console
+    -   Emit a `delivered` event with the same order payload passed along
+
+### tests
+
+Testing is not required for this lab. To visually test that you application is running as expected, you can use the following sample application: [https://5ctmj.csb.app/](https://5ctmj.csb.app/)
+
+## Lab Submission
+
+In order to submit this lab, you will need to provide a link to your lab `README.md`. You do not need to deploy to Heroku.
+
+-   `README.md`
+    -   Ensure your lab `README.md` is well detailed in how to install and run your applications
+    -   Provide a link to a pull request from a feature branch into your lab repository's master branch
+        -   You can merge the pull request if desired (a link to the PR should still exist)
+    -   Provide a [UML diagram](https://www.uml-diagrams.org/index-examples.html) detailing how the modules/files/pieces of your applications fit together.
+-   Code Documentation / Cleanliness
+    -   Ensure that your code is well formatted and passes all lint tests
+    -   Ensure that all functions and classes within your code are documented with JSDoc comments
+        -   [Official Documentation](http://usejsdoc.org/about-getting-started.html)
+        -   [Cheat Sheet](https://devhints.io/jsdoc)
+        -   [Style Guide](https://github.com/shri/JSDoc-Style-Guide)
+        -   Be descriptive about the purpose of the function / class
+        -   Declare data types for parameters and return values
+        -   Note that you do not have to generate a JSDoc hosted website, just the commenting in your code files will suffice
+-   Canvas Submission
+    -   Submit a link to your lab's `README.md`
+    -   Once your lab has been graded for the first time, you may resubmit the link to your lab's `README.md` exactly once for a regrade

@@ -1,131 +1,176 @@
-# LAB: Message Queues
+# Lab 19 --- Message Queues
 
-Create an multi-server, event driven application that uses only events transmitted over a network, using socket.io to trigger logging based on activity.
+In this lab, you'll combine Express servers and sockets, to have a communication network over both HTTP and TCP. This lab will only be focusing on order delivery, and not on order creation or transit. For this lab, you may work in a pair if you would like, just be sure to document that on your submitted README file.
 
-We're going to continue working on the application for a company called **CAPS** - The Code Academy Parcel Service
+## Application Overview
 
-**CAPS** will simulate a delivery service where vendors (such a flower shops) will ship products using our delivery service and when delivered, be notified that their customers received what they purchased.
+For this lab, you should have four independent applications running on terminal and communicating with one another. These applications will be:
 
-As you can imagine, the CAPS system, the Vendors and the Drivers will all be on different computers and can't be using the same running application, so we'll need a way to keep everything in sync over the network.
+-   The message queue server (socket server)
+-   The delivery API server (socket client, express server)
+-   Vendor 01 (socket client)
+-   Vendor 02 (socket client)
 
-## Before you begin
+The delivery API server should expose an HTTP POST route of the format `/delivery/:vendor/:order-id`. This route will not have any body parameters, and when triggered using Postman or a similar service, it should tell the appropriate vendor that an order was delivered. If that vendor happens to be disconnected, the message should be saved and sent when the vendor is back online.
 
-Refer to *Getting Started*  in the [lab submission instructions](../../../reference/submission-instructions/labs/README.md) for complete setup, configuration, deployment, and submission instructions.
+> Note - You do not have to worry about the generation of orders for this lab. Instead, to test your lab, you will just be sending POST requests to your API server with either Vendor 01 or Vendor 02's name, and some random/gibberish `order-id`
 
-## Requirements
+As an example, here is how your console outputs might look like for one generated order:
 
-Build a set of applications to manage deliveries made by CAPS Drivers. This will simulate a delivery driver delivering a package and scanning the package code. Retailers will be able to see in their dashboard or log, a list of all packages delivered.
+#### Message Queue Server
 
-We will need:
+```
+Message Queue Server up and running on 3001
+Connected 8Um4-hGsBVGxRK1kAAAA
+Connected QFWO_O6ylXOKhwKDAAAB
+Connected 21UFwNA3wfUzDenzAAAC
+```
 
-- An API server that handles incoming requests from drivers when a package has been delivered
-- A Queue Server Hub that
-  - Is alerted by the API server when a delivery has been made
-  - Broadcasts "Delivery Confirmations" to retailers
-- Client (Vendor) Applications that retailers would run, which subscribe to the Queue so that they can be alerted when a delivery was made
+#### API Server
 
-### API Server
+```
+API Server up and running on 3000
+delivery { vendor: 'flower-shop', orderId: '12345-ABCD' }
+delivery { vendor: 'candy-shop', orderId: '39201-GHWU' }
+delivery { vendor: 'candy-shop', orderId: '93827-TJFC' }
+```
 
-- Create a server application in express called `cfps-server`
-- Connect the server to your Message Queue Server
-- Listen for 1 Route:
-  - POST on /delivery/:retailer/:code
-  - Where :retailer is the name of our client and :code is a unique tracking code
-  - i.e. <http://localhost:3000/delivery/1-206-flowers/12345-ABCD>
-- When the route is accessed by a client (POSTMAN or `httpie`), emit an event to the Queue Server
-  - Event Name: `delivered`
-  - Payload: Object Containing the delivery information
+#### Vendor Applications
 
-  ```javascript
-  {
-    retailer: '1800-flowers',
-    code: '12345-ABCD'
-  };
-  ```
+##### Flower Shop Output
 
-### Message Queue Server
+```
+Thank you for delivering order 12345-ABCDaTRwaf
+```
 
-- Create a new node application called `queue-server`
-- Create an undelivered queue for storing queued messages
-- Add an event handler for `package-delivery`
-- When this event is triggered ...
-  - Broadcast the same event, with the following payload to all connected clients
+##### Candy Shop Output
 
-    ```javascript
-    {
-      messageID: "Unique-Message-ID,
-      payload: ORIGINAL.PAYLOAD
-    }
+```
+Thank you for delivering order 39201-GHWU
+Thank you for delivering order 93827-TJFC
+```
+
+## Getting Started
+
+1. Create a new GitHub repository for your lab, or branch off of an existing lab repository
+
+2. Add a `README.md` for your lab, using the [`README-TEMPLATE.md` file](../../reference/submission-instructions/labs/README-template.md) as a starting point
+
+3. Ensure your directory has the following files at the top level (not in any sub-folders):
+
+    - `.gitignore` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.gitignore))
+
+    - `.eslintrc.json` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.eslintrc.json))
+
+    - `.eslintignore` ([template](https://github.com/codefellows/seattle-javascript-401n16/blob/master/configs/.eslintignore))
+
+4. Set up the file structure for this lab according to the following outline:
+
+    > The following outline below is a suggested implementation. Note that your lab does NOT have to constrain itself to these suggestions; there are many ways to code an application and we encourage creativity and unique approaches! This suggested implementation is primarily for anyone who is having trouble knowing where/how to start.
+
+    ```
+    .gitignore
+    .eslintrc.json
+    .eslintignore
+
+    api.js
+    queue-server.js
+    vendor-01.js
+    vendor-02.js
     ```
 
-  - Any event broadcast to a client that does not get delivered should be added to the appropriate queue for the client
-- Add an event handler called `getall` which a client can trigger to fetch each undelivered message for an event to which they have subscribed
+Note that in this repo, there are four applications being defined. You can choose to have these applications share a `package.json`, or each belong to their own sub-folder with their own `package.json`. If you have a single `package.json`, be sure to create unique scripts to start each application:
 
-> How will you track each client's receipt of messages sent so you can remove them from the queue?
+```json
+   "start-queue": "node queue-server.js",
+   "start-api": "node api.js",
+   "start-vendor-01": "node vendor-01.js",
+   "start-vendor-02": "node vendor-02.js"
+   "lint": "eslint **/*.js"
+```
 
-### Client Applications
+Whichever route you choose, be sure to provide detailed information about how to run your applications in your README file.
 
-- Create a 2 applications that subscribe to the `delivered` event
-  - `acme-widgets`
-  - `1-206-flowers`
-- On startup, your client applications should request all events from the server that are in your queue (events/messages you've not yet received)
-- Upon handling any `delivered` event
-  - Log a custom message to the console
-  - Let the queue server know that your application handled this event (message id) so that it can de-queue it
+## Implementation
 
-## CODE QUALITY / ENGINEERING GOALS
+> The following outline below is a suggested implementation. Note that your lab does NOT have to constrain itself to these suggestions; there are many ways to code an application and we encourage creativity and unique approaches! This suggested implementation is primarily for anyone who is having trouble knowing where/how to start.
 
-Rather than simply putting all of the required logic in every file, create a Queue class library that you can include in each of the applications (api, clients) to uniformly communicate, subscribe, etc with the Queue server. Endeavor to make integrating new client applications easy.
+Note that because this implementation is multiple applications, you will need to run four applications together, and then use a tool like Postman to kick off some delivery POST requests. Be sure to start up your applications in the correct order, or there may be connection issues.
 
-For example, this would be the ideal code for a client subscriber application, rather than having to manage every feature, in every app.
+1. `queue-server` needs to be up first so that it can accept socket connections
+1. `api-server` needs to be up next to receive POST requests
+1. Vendor applications should be started up next to acknowledge deliveries
+1. Postman (or a similar tool) should be used to send a delivery POST request to the `api-server`
+
+> Note that because we're using message queues, even if you swap steps 3 and 4, your vendor applications should be able to "catch-up" with any messages they missed.
+
+### queue-server.js
+
+This application will hold your queue server, running on port `3001`. It should store some object/array containing the different queues in the system. When sockets connect to this socket server, a few actions should take place:
+
+-   The server should log to the console a connected message, with the socket id shown
+-   The server should attach event listeners upon the socket for the following events:
+    -   `received` - indicates that a socket received a message from the server, so that it can be deleted from the server
+    -   `getAll` - indicates that a socket wants to get all messages in the queue it's looking for
+    -   `subscribe` - indicates that a socket wants to subscribe to a queue. The server will put the socket in its own room
+    -   `delivered` - indicates that our API server received a delivery POST request and needs to communicate this to the correct vendor. The queue server will emit another `delivered` event to the correct client
+
+The `delivered` event/message will act as the entry point for the data flow - our API server will emit this event when an HTTP POST request is heard.
+
+### api.js
+
+This application will be both an Express API server running on port `3000` _and_ a socket client connected to the queue server. It should have one primary route defined, `POST /delivery/:vendor/:order-id`. In this route, `:vendor` is the name of the vendor client this delivery pertains to, and `:order-id` is some random collection of letters and digits that represents that order id.
+
+When this POST route is hit with a request, the API server should emit a `delivered` event (which will be handled within the queue server). This even should have a payload with the data that matches the following format:
 
 ```javascript
-const Queue = require('./lib/queue.js');
-const companyID = 'flowers-r-us';
-const queue = new Queue(companyID);
-
-queue.subscribe('delivered' delivered);
-queue.trigger('getall', 'delivered');
-
-function delivered(payload) {
-  console.log('Flowers Were Delivered', payload.code);
+{
+  vendor: 'flower-shop',
+  orderId: '12345-ABCD'
 }
 ```
 
-### Testing - Basic HTTP
+It should then return a response of status 200, representing that the delivery was noted in the system.
 
-- Start all 4 servers
-  - API Server
-  - Queue Server
-  - Both Client Application Servers
-- Use Postman, RESTy, or `httpie` to test your API Server
-  - Send a POST request to your server to send delivery notifications
-    - ie.
-      - <http://localhost:3000/delivery/acme-widgets/123>
-      - <http://localhost:3000/delivery/acme-widgets/abc>
-      - <http://localhost:3000/delivery/1-206-flowers-r-us/567>
-      - <http://localhost:3000/delivery/acme-widgets/xyz>
-  - If successful ...
-    - Your API server should notify the Queue Server
-    - The Queue Server should broadcast a message
-    - Your application servers should show your custom console logs
-- Stop one of your applications servers
-  - Re-Send some requests to your API that the server should have handled
-  - This should leave some undelivered messages
-  - Re-Start the application server
-    - It should do an immediate request of all queued messages and log them out normally
+### vendor-01.js and vender-02.js
 
-#### Web Server Visual Tests
+You will have two applications representing two different vendors. Note that most of the code between these two will be the same. Think about ways to modularize things so you are being efficient! Each vendor application should have a vendor name attached to it, for example `flower-shop` and `candy-shop`. When these vendor applications start up, they should:
 
-- Open this [Web Application](https://ftgiu.csb.app/)
-- In the form at the top of the page, choose a retailer and enter a fake tracking number
-- Submit the form
-- This will POST to `/delivery` on <http://localhost:3000> and simulate a delivery
-- If your lab is working, this app will show your queued responses in the correct columns
-  - If you leave the website and do manual POSTS as before using postman and then re-visit the website
-    - The website will attempt to `getall` from your queue
-    - It should report all deliveries
+-   Emit a `subscribe` event, indicating that they want to subscribe to a certain queue. This queue is typically equivalent to the vendor name.
+-   Register a listener for the `delivered` event, which will check the incoming delivery data and emit a `received` event if the data was successfully received
+-   Emit a `getAll` event, indicating that they want to get any messages on the queue they've subscribed to
 
-## Assignment Submission Instructions
+### tests
 
-Refer to the the [Submitting Express Server Lab Submission Instructions](../../../reference/submission-instructions/labs/express-servers.md) for the complete lab submission process and expectations
+Testing is not required for this lab. To visually test that you application is running as expected, follow the below order of operations:
+
+-   Start all applications in the following order
+    -   Queue Server
+    -   API Server
+    -   Vendors
+-   Use an application like Postman to send multiple `POST` requests to `/delivery/:vendor/:order-id`. Be sure to send requests for both of your vendors. Examples are:
+    -   `POST /delivery/flower-shop/12345-ABCD`
+    -   `POST /delivery/candy-shop/45678-FCKE`
+-   You should now see that your vendor applications log a thank you message for their own orders. You can now stop one or both of the vendor applications and send more `POST` requests. When you start the applications back up, the vendors should "catch up" to the order deliveries they missed while stopped.
+
+## Lab Submission
+
+In order to submit this lab, you will need to provide a link to your lab `README.md`. You do not need to deploy to Heroku.
+
+-   `README.md`
+    -   Ensure your lab `README.md` is well detailed in how to install and run your applications
+    -   Provide a link to a pull request from a feature branch into your lab repository's master branch
+        -   You can merge the pull request if desired (a link to the PR should still exist)
+    -   Provide a [UML diagram](https://www.uml-diagrams.org/index-examples.html) detailing how the modules/files/pieces of your applications fit together.
+-   Code Documentation / Cleanliness
+    -   Ensure that your code is well formatted and passes all lint tests
+    -   Ensure that all functions and classes within your code are documented with JSDoc comments
+        -   [Official Documentation](http://usejsdoc.org/about-getting-started.html)
+        -   [Cheat Sheet](https://devhints.io/jsdoc)
+        -   [Style Guide](https://github.com/shri/JSDoc-Style-Guide)
+        -   Be descriptive about the purpose of the function / class
+        -   Declare data types for parameters and return values
+        -   Note that you do not have to generate a JSDoc hosted website, just the commenting in your code files will suffice
+-   Canvas Submission
+    -   Submit a link to your lab's `README.md`
+    -   Once your lab has been graded for the first time, you may resubmit the link to your lab's `README.md` exactly once for a regrade

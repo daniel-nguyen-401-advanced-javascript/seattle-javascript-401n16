@@ -1,0 +1,13 @@
+{
+    "name": "in-class-lab",
+    "version": "1.0.0",
+    "description": "",
+    "author": "Sonia",
+    "main": "linkedlist.js",
+    "scripts": {
+        "lint": "eslint **/*.js",
+        "test": "jest --verbose --coverage",
+        "test-watch": "jest --watchAll --verbose --coverage"
+    },
+    "license": "ISC"
+}

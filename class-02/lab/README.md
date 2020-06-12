@@ -1,6 +1,6 @@
 # LAB: Classes, Inheritance, Functional Programming
 
-In this lab, you will be doing your first "refactoring", which the process of migrating working code into a new methodology or tech stack. Today, you'll migrate a standard constructor function exported from a node module into a Class, keeping the functionality (and the interface) exactly the same.
+In this lab, you will be doing your first "refactoring", which is the process of migrating working code into a new methodology or tech stack. Today, you'll refactor your standard constructor functions and prototypes into a class, keeping the functionality (and the interface) exactly the same.
 
 ## Before you begin
 
@@ -14,7 +14,9 @@ Refer to *Getting Started*  in the [lab submission instructions](../../../refere
 
 Your functional requirements are the same as for the previous lab:
 
-Create a command line application using Node.js called `notes` which will allow the user to specify a note (words) to be added to a database.
+- Create a command line application using Node.js called `notes` which will allow the user to specify a note (aka a string) to be added to a database
+
+  > The database portion of this assignment will be covered in a later class! For now, just prioritize printing to the console instead of "saving" to a database.
 
 The user should be able to type the `notes` command with an add flag and a string of text, like this:
 
@@ -29,31 +31,33 @@ notes -a "This is a really cool thing that I wanted to remember for later"
 
 ### Implementation Details
 
-- Refactor your previous work by re-implementing both the `Input` and `Notes` library modules as ES6 Classes
+- Refactor your previous work by re-implementing both the `Input` and `Notes` library modules as ES6 classes
 - Your previous tests should remain functioning after the refactor
-- Create a schema/rules set for both the Command object created by the Input class and the Note created by the Notes class
-
- **Software Engineering Note!** *This is the heart of a refactor -- re-implement the same functionality, the same signature, and the same I/O while completely rewriting the underlying implementation*
+- Create a schema for the command object (action + payload) created by the Input class and the Note (id + note contents) created by the Notes class
+  - The command object should have an action that is a recognized action (for now just `'add'`, though this list may grow)
+  - The command object may or may not have a payload
+  - The Note should have an id that is of type number
+  - The Note should have some contents of type string
 
 #### Add validation to the Input and Notes Classes
 
-- Add a new method to the Input class called `valid()` which should inspect the command object and return a boolean if it is properly formatted according to your rules
+- Your Input class should have a method called `valid()` which inspects the command object and returns a boolean if it is properly formatted according to your rules
 - Add a new method to the Notes class called `valid()` which should inspect the note object and return a boolean if it is properly formatted according to your rules
 - Implement these methods using a new `Validator` class (see requirements below)
 
-##### Compose a validation class library
+#### Compose a validation class library
 
 > `lib/validator.js`
 
-**Write an object validation module that exports a "Validate" class that can, based on the inputs, validate whether or not an entity is satisfactory.**
+Write a "Validator" class that can validate whether or not an entity is satisfactory based on a provided schema.
 
-Implementation
+Implementation details: 
 
-- Exports a Class
+- Exports a class
   - The constructor should accept a single parameter
     - An object that is a set of "rules" for validation (called a "schema")
   - The class should expose a method called `validate()` that accepts a single parameter
-    - An object to validate
+    - An object to validate against the saved schema 
   - When called, the validate() method should return a boolean indicating whether the object is valid based on the schema
 - Things we want to be able to validate
   - Is the object we're trying to validate actually an object?
@@ -71,7 +75,7 @@ Implementation
       };
       ```
 
-  - Given those rules, this person should be validated as `true`
+  - Given those schema rules, this person should be validated as `true`
 
       ```javascript
       const susan = {

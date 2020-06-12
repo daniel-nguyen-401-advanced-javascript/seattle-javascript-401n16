@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Auth Test</title>
+    </head>
+
+    <body>
+        <main>
+            <a id="oauth" href="#">Login</a>
+        </main>
+
+        <script>
+            // TODO: What is this URL used for?
+            let URL = 'https://accounts.google.com/o/oauth2/v2/auth';
+
+            // TODO: What do each of these key-value pairs mean?
+            let options = {
+                client_id:
+                    '128009605781-s3kkn6vv1lnvhcv77mk6jom6nac4vob2.apps.googleusercontent.com',
+                redirect_uri: 'http://localhost:3000/oauth',
+                response_type: 'code',
+                scope: 'https://www.googleapis.com/auth/userinfo.profile',
+                state: 'asldfjdfs',
+            };
+
+            // TODO: What is this map function doing?
+            let QueryString = Object.keys(options)
+                .map((key) => {
+                    return `${key}=` + encodeURIComponent(options[key]);
+                })
+                .join('&');
+
+            let authURL = `${URL}?${QueryString}`;
+
+            let link = document.getElementById('oauth');
+            link.setAttribute('href', authURL);
+        </script>
+    </body>
+</html>

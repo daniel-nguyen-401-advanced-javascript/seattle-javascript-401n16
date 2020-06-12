@@ -1,0 +1,12 @@
+{
+    "name": "modules-demo",
+    "version": "1.0.0",
+    "description": "This is a demo showing how to create packages and modules.",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "test": "echo \"AHHHH YOU MESSED UP!!!\" && exit 1"
+    },
+    "author": "Sonia Kandah",
+    "license": "ISC"
+}

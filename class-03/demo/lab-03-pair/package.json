@@ -1,0 +1,16 @@
+{
+    "name": "lab-03-pair",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "jest --verbose --coverage",
+        "start": "node index.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "minimist": "^1.2.5",
+        "mongoose": "^5.9.6"
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "name": "in-class-classes",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "jest --verbose --coverage",
+        "start": "node index.js"
+    },
+    "author": "",
+    "license": "ISC"
+}

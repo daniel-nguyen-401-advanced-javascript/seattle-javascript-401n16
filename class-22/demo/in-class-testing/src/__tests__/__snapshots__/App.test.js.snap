@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot test for App matches the snapshot 1`] = `
+<div
+  className="App"
+>
+  <h1
+    className="title"
+  >
+    Enter your name
+  </h1>
+  <input
+    className="my-input"
+    onChange={[Function]}
+    type="text"
+    value="Sarah Smalls"
+  />
+  <h2
+    className="fun-display"
+  >
+    Welcome 
+    Sarah Smalls
+    ! Do you like
+     
+    ice cream
+    ?
+  </h2>
+  <h3>
+    Hello! I'm a child component
+  </h3>
+</div>
+`;
